@@ -6,10 +6,10 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyDFnedGL4qr_jenIpWYpbvot8s7Vuay_88',
+    apiKey: 'AIzaSyA1szgUlN-GUaEfegJ3CZS_TAPLXDVwRO8',
     authDomain: 'geofirestore.firebaseapp.com',
     databaseURL: 'https://geofirestore.firebaseio.com',
-    projectId: 'geofirestore',
+    projectId: 'ob-app-db2b6',
     storageBucket: 'geofirestore.appspot.com',
     messagingSenderId: '830598661992'
   }

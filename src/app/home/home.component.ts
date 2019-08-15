@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Geokit, LatLngLiteral } from 'geokit';
@@ -17,36 +16,38 @@ export class HomeComponent implements OnInit, OnDestroy {
   private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
   private _lastOpen: string;
 
-  constructor(private _ls: LocationService, private _rs: RestaurantsService) { }
+  constructor(private locationService: LocationService, private restaurantsService: RestaurantsService) { }
 
   ngOnInit() {
   }
 
   ngOnDestroy() {
-    this._ls.updatingStart();
+    this.locationService.updatingStart();
   }
 
   get coordsMap(): Observable<firebase.firestore.GeoPoint> {
-    return this._ls.mapCenter;
+    return this.locationService.mapCenter;
   }
 
   get coordsUser(): Observable<firebase.firestore.GeoPoint> {
-    return this._ls.coordinates;
+    return this.locationService.coordinates;
   }
 
   get restaurants(): Observable<any[]> {
-    return this._rs.restaurants;
+    return this.restaurantsService.restaurants;
   }
 
   get updating(): Observable<boolean> {
-    return this._ls.updating;
+    return this.locationService.updating;
   }
 
   public centerChange(coordinates: LatLngLiteral): void {
     this._lastLocation = new firebase.firestore.GeoPoint(coordinates.lat, coordinates.lng);
 
     this.coordsUser.pipe(first()).subscribe((coords: firebase.firestore.GeoPoint) => {
-      if (Geokit.distance(this._geopoint2Literal(this._lastLocation), this._geopoint2Literal(coords)) > 0.005) { this._ls.updatingStop(); }
+      if (Geokit.distance(this._geopoint2Literal(this._lastLocation), this._geopoint2Literal(coords)) > 0.005) {
+        this.locationService.updatingStop();
+      }
     });
   }
 
@@ -59,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public idle(): void {
-    this._ls.updateMapCenter(this._lastLocation);
+    this.locationService.updateMapCenter(this._lastLocation);
   }
 
   public isOpen(id: string): boolean {
@@ -67,8 +68,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public toggleWatch(): void {
-    this._ls.updating.pipe(first()).subscribe((state: boolean) => {
-      (state) ? this._ls.updatingStop() : this._ls.updatingStart();
+    this.locationService.updating.pipe(first()).subscribe((state: boolean) => {
+      (state) ? this.locationService.updatingStop() : this.locationService.updatingStart();
     });
   }
 
