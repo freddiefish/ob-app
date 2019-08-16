@@ -6,8 +6,6 @@ import {first} from 'rxjs/operators';
 
 import {LocationService} from '../../services/location.service';
 import {DecisionMarkersService} from '../../services/decision-markers.service';
-import {environment} from '../../../environments/environment';
-import {fromArray} from 'rxjs/internal/observable/fromArray';
 import {IDecisionMarker} from '../../models/decision-marker.model';
 import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.model';
 import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-maps-types';
@@ -20,11 +18,11 @@ import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-map
 export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   // TODO: Revert this
-  // private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
-  private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(
+  private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
+  /*private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(
     environment.mockedAntwerpLocation.latitude,
     environment.mockedAntwerpLocation.longitude,
-  );
+  );*/
   private _lastOpen: string;
 
   @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
@@ -42,19 +40,19 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   }
 
   get coordsMap(): Observable<firebase.firestore.GeoPoint> {
-    // return this.locationService.mapCenter;
-    return fromArray([new firebase.firestore.GeoPoint(
+    return this.locationService.mapCenter;
+    /*return fromArray([new firebase.firestore.GeoPoint(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude
-    )]);
+    )]);*/
   }
 
   get coordsUser(): Observable<firebase.firestore.GeoPoint> {
-    // return this.locationService.coordinates;
-    return fromArray([new firebase.firestore.GeoPoint(
+    return this.locationService.coordinates;
+    /*return fromArray([new firebase.firestore.GeoPoint(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude
-    )]);
+    )]);*/
   }
 
   get decisionMarkers(): Observable<IDecisionMarker[]> {
