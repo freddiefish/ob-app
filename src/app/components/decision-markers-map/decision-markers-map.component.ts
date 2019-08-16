@@ -19,11 +19,11 @@ import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.mod
 export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   // TODO: Revert this
-  // private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
-  private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(
+  private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
+  /*private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(
     environment.mockedAntwerpLocation.latitude,
     environment.mockedAntwerpLocation.longitude,
-  );
+  );*/
   private _lastOpen: string;
 
   @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
@@ -38,19 +38,19 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   }
 
   get coordsMap(): Observable<firebase.firestore.GeoPoint> {
-    // return this.locationService.mapCenter;
-    return fromArray([new firebase.firestore.GeoPoint(
+    return this.locationService.mapCenter;
+    /*return fromArray([new firebase.firestore.GeoPoint(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude
-    )]);
+    )]);*/
   }
 
   get coordsUser(): Observable<firebase.firestore.GeoPoint> {
-    // return this.locationService.coordinates;
-    return fromArray([new firebase.firestore.GeoPoint(
+    return this.locationService.coordinates;
+    /*return fromArray([new firebase.firestore.GeoPoint(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude
-    )]);
+    )]);*/
   }
 
   get decisionMarkers(): Observable<IDecisionMarker[]> {
