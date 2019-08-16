@@ -1,0 +1,117 @@
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import * as firebase from 'firebase';
+import {Geokit, LatLngLiteral} from 'geokit';
+import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
+
+import {LocationService} from '../../services/location.service';
+import {DecisionMarkersService} from '../../services/decision-markers.service';
+import {environment} from '../../../environments/environment';
+import {fromArray} from 'rxjs/internal/observable/fromArray';
+import {IDecisionMarker} from '../../models/decision-marker.model';
+import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.model';
+
+@Component({
+  selector: 'app-decision-markers-map',
+  templateUrl: './decision-markers-map.component.html',
+  styleUrls: ['./decision-markers-map.component.scss']
+})
+export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
+
+  // TODO: Revert this
+  // private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
+  private _lastLocation: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(
+    environment.mockedAntwerpLocation.latitude,
+    environment.mockedAntwerpLocation.longitude,
+  );
+  private _lastOpen: string;
+
+  @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
+
+  constructor(private locationService: LocationService, private markersService: DecisionMarkersService) { }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.locationService.updatingStart();
+  }
+
+  get coordsMap(): Observable<firebase.firestore.GeoPoint> {
+    // return this.locationService.mapCenter;
+    return fromArray([new firebase.firestore.GeoPoint(
+      environment.mockedAntwerpLocation.latitude,
+      environment.mockedAntwerpLocation.longitude
+    )]);
+  }
+
+  get coordsUser(): Observable<firebase.firestore.GeoPoint> {
+    // return this.locationService.coordinates;
+    return fromArray([new firebase.firestore.GeoPoint(
+      environment.mockedAntwerpLocation.latitude,
+      environment.mockedAntwerpLocation.longitude
+    )]);
+  }
+
+  get decisionMarkers(): Observable<IDecisionMarker[]> {
+    return this.markersService.decisionMarkers;
+  }
+
+  get updating(): Observable<boolean> {
+    return this.locationService.updating;
+  }
+
+  public centerChange(coordinates: LatLngLiteral): void {
+    this._lastLocation = new firebase.firestore.GeoPoint(coordinates.lat, coordinates.lng);
+
+    this.coordsUser
+      .pipe(
+        first()
+      )
+      .subscribe((coords: firebase.firestore.GeoPoint) => {
+        if (Geokit.distance(this._geopoint2Literal(this._lastLocation), this._geopoint2Literal(coords)) > 0.005) {
+          this.locationService.updatingStop();
+        }
+      });
+  }
+
+  public clickedMarker(decisionMarker: IDecisionMarker, geolocation: firebase.firestore.GeoPoint): void {
+    this._lastOpen = decisionMarker.$key;
+
+    this.decisionMarkerSelected.emit({decisionMarker, geolocation});
+  }
+
+  public distance(start: firebase.firestore.GeoPoint, destination: firebase.firestore.GeoPoint): string {
+    return Geokit.distance(this._geopoint2Literal(start), this._geopoint2Literal(destination), 'miles').toFixed(1);
+  }
+
+  public idle(): void {
+    this.locationService.updateMapCenter(this._lastLocation);
+  }
+
+  public isOpen(id: string): boolean {
+    return (this._lastOpen === id);
+  }
+
+  public toggleWatch(): void {
+    this.locationService.updating
+      .pipe(
+        first()
+      )
+      .subscribe((state: boolean) => {
+        (state) ? this.locationService.updatingStop() : this.locationService.updatingStart();
+      });
+  }
+
+  public trackByFn(index: number, item: any): string {
+    return item.$key;
+  }
+
+  private _geopoint2Literal(coordinates: firebase.firestore.GeoPoint): LatLngLiteral {
+    return {
+      lat: coordinates.latitude,
+      lng: coordinates.longitude
+    };
+  }
+
+}

@@ -1,14 +1,5 @@
 {
   "projects": {
-    "default": "geofirestore"
-  },
-  "targets": {
-    "geofirestore": {
-      "hosting": {
-        "spittinhotgeofirestore": [
-          "spittinhotgeofirestore"
-        ]
-      }
-    }
+    "default": "ob-app-db2b6"
   }
 }

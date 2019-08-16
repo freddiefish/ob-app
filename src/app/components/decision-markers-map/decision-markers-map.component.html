@@ -1,0 +1,76 @@
+<agm-map [latitude]="(coordsMap | async)?.latitude"
+         [longitude]="(coordsMap | async)?.longitude"
+         (centerChange)="centerChange($event)"
+         (idle)="idle()"
+         [zoom]="17"
+         [zoomControl]="false"
+         [streetViewControl]="false"
+         [usePanning]="true"
+         [fullscreenControl]="false"
+         [gestureHandling]="'greedy'">
+
+
+  <agm-marker [latitude]="(coordsUser | async)?.latitude"
+              [longitude]="(coordsUser | async)?.longitude"
+              iconUrl="./assets/bluedot.png">
+
+  </agm-marker>
+
+
+  <agm-marker-cluster minimumClusterSize="5"
+                      imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+    <ng-container *ngFor="let decisionMarker of decisionMarkers | async; trackBy: trackByFn">
+
+      <agm-marker *ngFor="let geolocation of decisionMarker.geolocations"
+                  [latitude]="geolocation.latitude"
+                  [longitude]="geolocation.longitude"
+                  [openInfoWindow]="false"
+                  (markerClick)="clickedMarker(decisionMarker, geolocation)">
+
+        <!--<agm-info-window *ngIf="isOpen(decisionMarker.$key)" [isOpen]="isOpen(decisionMarker.$key)">
+
+          <h3>{{decisionMarker.title}}</h3>
+          <p>{{decisionMarker.url}}</p>
+          <p>{{distance((coordsUser | async), geolocation)}} miles away</p>
+
+        </agm-info-window>-->
+
+      </agm-marker>
+
+    </ng-container>
+
+  </agm-marker-cluster>
+
+</agm-map>
+
+
+<button class="fab"
+        (click)="toggleWatch()">
+
+  <i class="material-icons">
+    {{(updating | async)? 'gps_fixed' : 'gps_off'}}
+  </i>
+
+</button>
+
+
+
+<!--
+<agm-map [latitude]="(coordsMap | async)?.latitude" [longitude]="(coordsMap | async)?.longitude" (centerChange)="centerChange($event)"
+         (idle)="idle()" [zoom]="17" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" [fullscreenControl]="false"
+         [gestureHandling]="'greedy'">
+  <agm-marker [latitude]="(coordsUser | async)?.latitude" [longitude]="(coordsUser | async)?.longitude" iconUrl="./assets/bluedot.png"></agm-marker>
+  <agm-marker *ngFor="let place of restaurants | async; trackBy: trackByFn" [latitude]="place.coordinates.latitude"
+              [longitude]="place.coordinates.longitude" [openInfoWindow]="false" (markerClick)="clickedMarker(place.$key)">
+    <agm-info-window *ngIf="isOpen(place.$key)" [isOpen]="isOpen(place.$key)">
+      <h3>{{place.name}}</h3>
+      <h5>{{place.type}}</h5>
+      <p>{{place.address}}</p>
+      <p>{{distance((coordsUser | async), place.coordinates)}} miles away</p>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+<button class="fab" (click)="toggleWatch()">
+  <i class="material-icons">{{(updating | async)? 'gps_fixed' : 'gps_off'}}</i>
+</button>
+-->

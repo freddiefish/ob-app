@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "modal";
 
 agm-map {
   height: 100vh;
@@ -15,9 +16,9 @@ agm-map {
   border-radius: 50%;
   width: 56px;
   height: 56px;
-  padding: 16px 0px;
+  padding: 16px 0;
   margin: auto;
-  box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
+  box-shadow: 2px 3px 3px 0 rgba(41, 41, 41, .3);
 }
 
 .fab:focus {

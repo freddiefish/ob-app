@@ -1,0 +1,20 @@
+app-street-view {
+  ::ng-deep {
+    #street-view-pano {
+      height: 50vh;
+    }
+  }
+}
+
+.modal {
+  .modal__close {
+    float: right;
+    cursor: pointer;
+  }
+}
+
+.more-info-url {
+  i {
+    vertical-align: middle;
+  }
+}

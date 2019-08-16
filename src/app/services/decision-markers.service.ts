@@ -5,15 +5,16 @@ import { Geokit, LatLngLiteral } from 'geokit';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { LocationService } from './location.service';
+import {IDecisionMarker} from '../models/decision-marker.model';
 
 @Injectable()
-export class RestaurantsService {
-  private _collection: GeoCollectionReference = new GeoFirestore(firebase.firestore()).collection('restaurants');
+export class DecisionMarkersService {
+  private _collection: GeoCollectionReference = new GeoFirestore(firebase.firestore()).collection('markers');
   private _previousCoords: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
-  private _restaurants: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private _decisionMarkers: BehaviorSubject<IDecisionMarker[]> = new BehaviorSubject<IDecisionMarker[]>([]);
 
-  constructor(private _ls: LocationService) {
-    this._ls.mapCenter.subscribe((center: firebase.firestore.GeoPoint) => {
+  constructor(private locationService: LocationService) {
+    this.locationService.mapCenter.subscribe((center: firebase.firestore.GeoPoint) => {
       if (Geokit.distance(this._geopoint2Literal(center), this._geopoint2Literal(this._previousCoords)) > 0.5) {
         this._previousCoords = center;
         console.log('Updating Center Of Query');
@@ -22,19 +23,20 @@ export class RestaurantsService {
     });
   }
 
-  get restaurants(): Observable<any[]> {
-    return this._restaurants.asObservable();
+  get decisionMarkers(): Observable<any[]> {
+    return this._decisionMarkers.asObservable();
   }
 
   private _query(center = this._previousCoords): void {
-    const query = this._collection.near({ center, radius: .5 });
+    // const query = this._collection.near({ center, radius: .5});
+    const query = this._collection.near({ center});
 
     query.get().then((snapshot) => {
-      console.log('New Snapshot');
       const docs = snapshot.docs.map((doc) => {
         return { $key: doc.id, ...doc.data() };
       });
-      this._restaurants.next(docs);
+      console.log({docs});
+      this._decisionMarkers.next(docs);
     });
   }
 

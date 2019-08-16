@@ -1,0 +1,39 @@
+<modal [id]="modalId">
+  <div class="modal" *ngIf="decisionMarker?.$key">
+
+    <div class="modal-body">
+      <h1 style="height: auto">
+        {{decisionMarker.title}}
+        <i style="" (click)="closeModal(modalId);" class="material-icons modal__close">close</i>
+      </h1>
+
+      <ng-container *ngIf="geolocation">
+        <app-street-view [position]="{lat: geolocation.latitude, lng: geolocation.longitude}"></app-street-view>
+      </ng-container>
+
+      <p style="text-align: right">
+        Date {{decisionMarker.date.toDate() | date: 'dd/MM/yyyy'}} <br>
+        <a class="more-info-url"
+           target="_blank"
+           href="{{decisionMarker.url}}">
+          more info url <i class="material-icons">link</i>
+        </a>
+      </p>
+
+      <!-- BACKGROUND -->
+      <p style="font-weight: bold">Background</p>
+      <app-read-more>
+        {{decisionMarker.background}}
+      </app-read-more>
+
+      <!-- HOW -->
+      <p style="font-weight: bold">How</p>
+      <app-read-more>
+        {{decisionMarker.decision}}
+      </app-read-more>
+
+    </div>
+
+  </div>
+  <div class="modal-background"></div>
+</modal>
