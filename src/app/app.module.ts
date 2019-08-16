@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { DecisionMarkerModalComponent } from './components/decision-marker-modal/decision-marker-modal.component';
 import {ModalComponent} from './components/modal.component';
 import {ReadMoreComponent} from './components/read-more.component';
+import {EllipsisModule} from 'ngx-ellipsis';
 
 
 
@@ -38,6 +39,7 @@ firebase.initializeApp(environment.firebase);
       apiKey: environment.firebase.apiKey
     }),
     AgmJsMarkerClustererModule,
+    EllipsisModule,
   ],
   providers: [
     LocationService,

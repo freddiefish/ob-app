@@ -22,15 +22,11 @@
 
       <!-- BACKGROUND -->
       <p style="font-weight: bold">Background</p>
-      <app-read-more>
-        {{decisionMarker.background}}
-      </app-read-more>
+      <app-read-more [content]="decisionMarker.background"></app-read-more>
 
       <!-- HOW -->
       <p style="font-weight: bold">How</p>
-      <app-read-more>
-        {{decisionMarker.decision}}
-      </app-read-more>
+      <app-read-more [content]="decisionMarker.decision"></app-read-more>
 
     </div>
 
