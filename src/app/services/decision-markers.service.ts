@@ -5,7 +5,7 @@ import {Geokit, LatLngLiteral} from 'geokit';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {LocationService} from './location.service';
-import {IDecisionMarker} from '../models/decision-marker.model';
+import {decisionMarkerSampleData, IDecisionMarker} from '../models/decision-marker.model';
 
 @Injectable()
 export class DecisionMarkersService {
@@ -30,6 +30,7 @@ export class DecisionMarkersService {
   private _query(center = this._previousCoords): void {
     const query = this._collection.near({ center, radius: .5});
     // const query = this._collection.near({center});
+
 
     query.get().then((snapshot) => {
       const docs = snapshot.docs.map((doc) => {

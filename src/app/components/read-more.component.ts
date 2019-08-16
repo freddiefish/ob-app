@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
         <div [class.truncate]="isCollapsed">
             <ng-content></ng-content>
             <div (click)="isCollapsed = !isCollapsed">
-              <i class="material-icons read-more-direction">{{isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}}</i>
+              <span class="read-more-direction">{{isCollapsed ? 'read more..' : 'read less..'}}</span>
             </div>
         </div>
     `,

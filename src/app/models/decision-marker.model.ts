@@ -364,6 +364,7 @@ decisionMarkerSampleData.forEach(sample => {
   this._collection.add({
     url: sample.url,
     background: sample.background,
+    date: new Date().toLocaleDateString(),
     decision: sample.decision,
     title: sample.title,
     coordinates: new firebase.firestore.GeoPoint(coordinates._lat, coordinates._long)

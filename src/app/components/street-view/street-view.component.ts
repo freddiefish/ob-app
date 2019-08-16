@@ -17,6 +17,7 @@ export class StreetViewComponent implements OnInit {
 
   @ViewChild('streetViewMap', {static: true}) streetViewMap: any;
   @ViewChild('streetViewPano', {static: true}) streetViewPano: any;
+  @ViewChild('streetViewContainer', {static: true}) streetViewContainer: any;
   @Input() zoom = 11;
   @Input() heading = 34;
   @Input() pitch = 10;
@@ -29,9 +30,9 @@ export class StreetViewComponent implements OnInit {
   private _position: LatLngLiteral = {lat: 0, lng: 0};
   @Input() set position(position: LatLngLiteral) {
     this._position = position;
-    /*if (this.map) {
+    if (this.map) {
       this.setStreetViewPanorama();
-    }*/
+    }
   }
   get position() {
     return this._position;
