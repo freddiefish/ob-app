@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   }
 
   openStreetView($event: IDecisionMarkerSelected) {
-    console.log($event);
     this.decisionMarkerModal.decisionMarker = $event.decisionMarker;
     this.decisionMarkerModal.geolocation = $event.geolocation;
 

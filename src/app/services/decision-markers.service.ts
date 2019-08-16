@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
-import { GeoFirestore, GeoCollectionReference } from 'geofirestore';
-import { Geokit, LatLngLiteral } from 'geokit';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {GeoCollectionReference, GeoFirestore} from 'geofirestore';
+import {Geokit, LatLngLiteral} from 'geokit';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-import { LocationService } from './location.service';
+import {LocationService} from './location.service';
 import {IDecisionMarker} from '../models/decision-marker.model';
 
 @Injectable()
 export class DecisionMarkersService {
-  private _collection: GeoCollectionReference = new GeoFirestore(firebase.firestore()).collection('markers');
+  private _collection: GeoCollectionReference = new GeoFirestore(firebase.firestore()).collection('decisions');
   private _previousCoords: firebase.firestore.GeoPoint = new firebase.firestore.GeoPoint(0, 0);
   private _decisionMarkers: BehaviorSubject<IDecisionMarker[]> = new BehaviorSubject<IDecisionMarker[]>([]);
 
@@ -28,14 +28,15 @@ export class DecisionMarkersService {
   }
 
   private _query(center = this._previousCoords): void {
-    // const query = this._collection.near({ center, radius: .5});
-    const query = this._collection.near({ center});
+    const query = this._collection.near({ center, radius: .5});
+    // const query = this._collection.near({center});
 
     query.get().then((snapshot) => {
       const docs = snapshot.docs.map((doc) => {
-        return { $key: doc.id, ...doc.data() };
+        return {$key: doc.id, ...doc.data()};
       });
       console.log({docs});
+
       this._decisionMarkers.next(docs);
     });
   }

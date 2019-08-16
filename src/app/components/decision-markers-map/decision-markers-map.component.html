@@ -21,11 +21,10 @@
                       imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
     <ng-container *ngFor="let decisionMarker of decisionMarkers | async; trackBy: trackByFn">
 
-      <agm-marker *ngFor="let geolocation of decisionMarker.geolocations"
-                  [latitude]="geolocation.latitude"
-                  [longitude]="geolocation.longitude"
+      <agm-marker [latitude]="decisionMarker.coordinates.latitude"
+                  [longitude]="decisionMarker.coordinates.longitude"
                   [openInfoWindow]="false"
-                  (markerClick)="clickedMarker(decisionMarker, geolocation)">
+                  (markerClick)="clickedMarker(decisionMarker, decisionMarker.coordinates)">
 
         <!--<agm-info-window *ngIf="isOpen(decisionMarker.$key)" [isOpen]="isOpen(decisionMarker.$key)">
 
