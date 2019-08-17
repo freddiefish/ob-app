@@ -1,4 +1,3 @@
-import * as firebase from 'firebase';
 import {GeoFirePoint} from 'geofirex';
 
 export interface IDecisionMarker {
@@ -8,7 +7,8 @@ export interface IDecisionMarker {
   url: string;
   date: any;
   decision: string;
-  geolocations: Array<GeoFirePoint>;
+  // geolocations: Array<GeoFirePoint>;
+  geolocations: any;
   coordinates: GeoFirePoint;
 }
 
