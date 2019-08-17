@@ -1,7 +1,7 @@
 import {IDecisionMarker} from './decision-marker.model';
-import * as firebase from 'firebase';
+import {GeoFirePoint} from 'geofirex';
 
 export interface IDecisionMarkerSelected {
   decisionMarker: IDecisionMarker;
-  geolocation: firebase.firestore.GeoPoint;
+  geolocation: GeoFirePoint;
 }

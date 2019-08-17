@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import {GeoFirePoint} from 'geofirex';
 
 export interface IDecisionMarker {
   $key: string;
@@ -7,8 +8,8 @@ export interface IDecisionMarker {
   url: string;
   date: any;
   decision: string;
-  geolocations: Array<firebase.firestore.GeoPoint>;
-  coordinates: firebase.firestore.GeoPoint;
+  geolocations: Array<GeoFirePoint>;
+  coordinates: GeoFirePoint;
 }
 
 export const decisionMarkerSampleData = [{

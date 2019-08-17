@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IDecisionMarker} from '../../models/decision-marker.model';
 import {ModalService} from '../../services/modal.service';
-import * as firebase from 'firebase';
+import {GeoFirePoint} from 'geofirex';
 
 @Component({
   selector: 'app-decision-marker-modal',
@@ -12,7 +12,7 @@ export class DecisionMarkerModalComponent implements OnInit {
 
   modalId = 'decision-marker-modal';
   @Input() decisionMarker: IDecisionMarker;
-  @Input() geolocation: firebase.firestore.GeoPoint;
+  @Input() geolocation: GeoFirePoint;
 
   constructor(private modalService: ModalService) { }
 

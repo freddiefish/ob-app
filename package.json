@@ -27,6 +27,7 @@
     "@angular/router": "~8.1.0",
     "firebase": "^6.2.4",
     "geofirestore": "github:geofirestore/geofirestore-js#dev",
+    "geofirex": "0.0.6",
     "geokit": "0.1.4",
     "js-marker-clusterer": "^1.0.0",
     "ngx-ellipsis": "^2.0.6",
