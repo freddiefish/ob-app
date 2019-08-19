@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { LocationService } from './services/location.service';
-import { DecisionMarkersService } from './services/decision-markers.service';
+import { DecisionLocationsService } from './services/decision-locations.service';
 import {AgmJsMarkerClustererModule} from '@agm/js-marker-clusterer';
 import { StreetViewComponent } from './components/street-view/street-view.component';
 import { DecisionMarkersMapComponent } from './components/decision-markers-map/decision-markers-map.component';
@@ -17,6 +17,8 @@ import { DecisionMarkerModalComponent } from './components/decision-marker-modal
 import {ModalComponent} from './components/modal.component';
 import {ReadMoreComponent} from './components/read-more.component';
 import {EllipsisModule} from 'ngx-ellipsis';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SharedModule} from './shared/shared.module';
 
 
 
@@ -32,6 +34,9 @@ firebase.initializeApp(environment.firebase);
     ModalComponent,
     ReadMoreComponent,
   ],
+  entryComponents: [
+    DecisionMarkerModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,13 +45,15 @@ firebase.initializeApp(environment.firebase);
     }),
     AgmJsMarkerClustererModule,
     EllipsisModule,
+    BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     LocationService,
-    DecisionMarkersService
+    DecisionLocationsService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private locationService: LocationService, private restaurantsService: DecisionMarkersService) { }
+  constructor(private locationService: LocationService, private restaurantsService: DecisionLocationsService) { }
 }

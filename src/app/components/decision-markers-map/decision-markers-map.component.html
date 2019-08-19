@@ -19,23 +19,18 @@
 
   <agm-marker-cluster minimumClusterSize="5"
                       imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-    <ng-container *ngFor="let decisionMarker of decisionMarkers | async; trackBy: trackByFn">
 
-      <agm-marker [latitude]="decisionMarker.geolocations.geopoint._lat"
-                  [longitude]="decisionMarker.geolocations.geopoint._long"
-                  [openInfoWindow]="false"
-                  (markerClick)="clickedMarker(decisionMarker, decisionMarker.geolocations)">
+    <ng-container *ngIf="decisionLocations$ | async; let decisionLocations">
+      <ng-container *ngFor="let location of decisionLocations; trackBy: trackByFn">
 
-        <!--<agm-info-window *ngIf="isOpen(decisionMarker.$key)" [isOpen]="isOpen(decisionMarker.$key)">
+        <agm-marker [latitude]="location.point.geopoint._lat"
+                    [longitude]="location.point.geopoint._long"
+                    [openInfoWindow]="false"
+                    (markerClick)="clickedMarker(location, decisionLocations)">
 
-          <h3>{{decisionMarker.title}}</h3>
-          <p>{{decisionMarker.url}}</p>
-          <p>{{distance((coordsUser | async), geolocation)}} miles away</p>
+        </agm-marker>
 
-        </agm-info-window>-->
-
-      </agm-marker>
-
+      </ng-container>
     </ng-container>
 
   </agm-marker-cluster>

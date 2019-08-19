@@ -1,15 +1,26 @@
-import {GeoFirePoint} from 'geofirex';
+import {firestore} from 'geofirex';
 
-export interface IDecisionMarker {
-  $key: string;
+export interface IDecision {
+  id: string;
   background: string;
+  date: string;
+  decision: string;
+  docId: string;
+  fullText: string;
+  groupId: string;
+  groupName: string;
+  published: boolean;
   title: string;
   url: string;
-  date: any;
-  decision: string;
-  // geolocations: Array<GeoFirePoint>;
-  geolocations: any;
-  coordinates: GeoFirePoint;
+}
+
+export interface IDecisionLocation {
+  id: string;
+  decisionRef: firestore.DocumentReference;
+  point: {
+    geopoint: firestore.GeoPoint;
+    geohash: string;
+  };
 }
 
 export const decisionMarkerSampleData = [{

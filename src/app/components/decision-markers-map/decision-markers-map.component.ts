@@ -4,12 +4,10 @@ import {Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 import {LocationService} from '../../services/location.service';
-import {DecisionMarkersService} from '../../services/decision-markers.service';
-import {IDecisionMarker} from '../../models/decision-marker.model';
+import {DecisionLocationsService} from '../../services/decision-locations.service';
+import {IDecisionLocation} from '../../models/decision-marker.model';
 import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.model';
 import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-maps-types';
-import {environment} from '../../../environments/environment';
-import {fromArray} from 'rxjs/internal/observable/fromArray';
 import {GeoFirePoint} from 'geofirex';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 
@@ -21,11 +19,11 @@ import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-clie
 export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   // TODO: Revert this
-  // private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
-  private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(
+  private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
+  /*private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(
     environment.mockedAntwerpLocation.latitude,
     environment.mockedAntwerpLocation.longitude,
-  );
+  );*/
   private _lastOpen: string;
 
   @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
@@ -33,7 +31,7 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     position: ControlPosition.TOP_LEFT,
   };
 
-  constructor(private locationService: LocationService, private markersService: DecisionMarkersService) { }
+  constructor(private locationService: LocationService, private markersService: DecisionLocationsService) { }
 
   ngOnInit() {
   }
@@ -43,23 +41,23 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   }
 
   get coordsMap(): Observable<GeoFirePoint> {
-    // return this.locationService.mapCenter;
-    return fromArray([InitializedGeoFireClient.geoFireClient.point(
+    return this.locationService.mapCenter;
+    /*return fromArray([InitializedGeoFireClient.geoFireClient.point(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude,
-    )]);
+    )]);*/
   }
 
   get coordsUser(): Observable<GeoFirePoint> {
-    // return this.locationService.coordinates;
-    return fromArray([InitializedGeoFireClient.geoFireClient.point(
+    return this.locationService.coordinates;
+    /*return fromArray([InitializedGeoFireClient.geoFireClient.point(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude,
-    )]);
+    )]);*/
   }
 
-  get decisionMarkers(): Observable<IDecisionMarker[]> {
-    return this.markersService.decisionMarkers;
+  get decisionLocations$(): Observable<IDecisionLocation[]> {
+    return this.markersService.decisionLocations;
   }
 
   get updating(): Observable<boolean> {
@@ -80,10 +78,13 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
       });
   }
 
-  public clickedMarker(decisionMarker: IDecisionMarker, geolocation: GeoFirePoint): void {
-    this._lastOpen = decisionMarker.$key;
+  public clickedMarker(decisionLocation: IDecisionLocation, decisionLocations: IDecisionLocation[]): void {
+    this._lastOpen = decisionLocation.id;
 
-    this.decisionMarkerSelected.emit({decisionMarker, geolocation});
+    this.decisionMarkerSelected.emit({
+      selectedDecisionLocation: decisionLocation,
+      allDecisionLocations: decisionLocations,
+    });
   }
 
   public distance(start: GeoFirePoint, destination: GeoFirePoint): string {

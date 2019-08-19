@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import * as geofirex from 'geofirex';
 import {GeoFireClient} from 'geofirex';
 import * as firebaseApp from 'firebase/app';
-import {IDecisionMarker} from '../models/decision-marker.model';
+import {IDecision} from '../models/decision-marker.model';
 
 
 @Injectable({
@@ -21,7 +21,7 @@ export class InitializedGeoFireClient {
    * @param lat
    * @param lng
    */
-  static createPoint(decisionMarker: Exclude<IDecisionMarker, 'geolocations'>, lat: number, lng: number) {
+  static createPoint(decisionMarker: Exclude<IDecision, 'geolocations'>, lat: number, lng: number) {
     const collection = InitializedGeoFireClient.geoFireClient.collection('test');
 
     const point = InitializedGeoFireClient.geoFireClient.point(lat, lng);

@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { DecisionMarkersService } from './decision-markers.service';
+import { DecisionLocationsService } from './decision-locations.service';
 
-describe('DecisionMarkersService', () => {
+describe('DecisionLocationsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DecisionMarkersService]
+      providers: [DecisionLocationsService]
     });
   });
 
-  it('should be created', inject([DecisionMarkersService], (service: DecisionMarkersService) => {
+  it('should be created', inject([DecisionLocationsService], (service: DecisionLocationsService) => {
     expect(service).toBeTruthy();
   }));
 });

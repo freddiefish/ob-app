@@ -1,35 +1,52 @@
-<modal [id]="modalId">
-  <div class="modal" *ngIf="decisionMarker?.$key">
+<ng-container *ngIf="decisionLocation?.id">
 
-    <div class="modal-body">
-      <h1 style="height: auto">
-        {{decisionMarker.title}}
-        <i style="" (click)="closeModal(modalId);" class="material-icons modal__close">close</i>
-      </h1>
+  <h1 mat-dialog-title>
+    <ng-container *ngIf="otherDecisionsInThisLocation$ | async; let otherDecisionsInThisLocation">
+      <button mat-icon-button
+              *ngIf="otherDecisionsInThisLocation.length"
+              [matMenuTriggerFor]="otherDecisions"
+              [matMenuTriggerData]="{decisions: otherDecisionsInThisLocation}">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </ng-container>
 
-      <ng-container *ngIf="geolocation">
-        <app-street-view [position]="{lat: geolocation.latitude, lng: geolocation.longitude}"></app-street-view>
-      </ng-container>
+    {{decision?.title}}
+    <i style="cursor: pointer" (click)="closeModal();" class="material-icons close-button">close</i>
+  </h1>
 
-      <p style="text-align: right">
-        Date {{decisionMarker.date | date: 'dd/MM/yyyy'}} <br>
-        <a class="more-info-url"
-           target="_blank"
-           href="{{decisionMarker.url}}">
-          more info url <i class="material-icons">link</i>
-        </a>
-      </p>
+  <mat-dialog-content>
+    <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view>
 
-      <!-- BACKGROUND -->
-      <p style="font-weight: bold">Background</p>
-      <app-read-more [content]="decisionMarker.background"></app-read-more>
+    <p style="text-align: right;">
+      Date {{decision?.date | date: 'dd/MM/yyyy'}} <br>
+      <a class="more-info-url"
+         *ngIf="decision?.url"
+         target="_blank"
+         href="{{decision?.url}}">
+        more info url <i class="material-icons">link</i>
+      </a>
+    </p>
 
-      <!-- HOW -->
-      <p style="font-weight: bold">How</p>
-      <app-read-more [content]="decisionMarker.decision"></app-read-more>
+    <!-- BACKGROUND -->
+    <p style="font-weight: bold">Background</p>
+    <app-read-more [content]="decision?.background"></app-read-more>
 
-    </div>
+    <!-- HOW -->
+    <p style="font-weight: bold">How</p>
+    <app-read-more [content]="decision?.decision"></app-read-more>
+  </mat-dialog-content>
 
-  </div>
-  <div class="modal-background"></div>
-</modal>
+</ng-container>
+
+<mat-menu #otherDecisions="matMenu">
+  <ng-template matMenuContent let-decisions="decisions">
+    <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length}} more decisions on this location:</p>
+    <button *ngFor="let decision of decisions"
+            mat-menu-item
+            (click)="setDecision(decision)">
+
+      {{decision.date | date}} {{decision.title}}
+
+    </button>
+  </ng-template>
+</mat-menu>
