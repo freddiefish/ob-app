@@ -49,9 +49,9 @@ export class DecisionLocationsService {
   private generateSamplePoints() {
     const decisionsCollection = InitializedGeoFireClient.geoFireClient.collection('test-decisions');
 
-    decisionMarkerSampleData.forEach(decisionMarker => {
+    decisionMarkerSampleData.forEach((decisionMarker, index) => {
       const decisionData = {
-        background: decisionMarker.background,
+        background: decisionMarker.background + ' at index ' + index,
         date: new Date().toUTCString(),
         decision: decisionMarker.decision,
         docId: '19.0805.1982.6385',
@@ -59,7 +59,7 @@ export class DecisionLocationsService {
         groupId: '19.0805.1982.6385',
         groupName: 'test name',
         published: true,
-        title: decisionMarker.title,
+        title: 'Decision ' + index,
       };
       // collection.setDoc($key, { ...rest, geolocations: points[0].data) })
       decisionsCollection.add({ ...decisionData })

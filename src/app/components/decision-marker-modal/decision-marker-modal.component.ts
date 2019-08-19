@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IDecision, IDecisionLocation} from '../../models/decision-marker.model';
 import {firestore} from 'geofirex';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {combineLatest, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-decision-marker-modal',
@@ -59,20 +59,9 @@ export class DecisionMarkerModalComponent implements OnInit {
   }
 
   private setOtherDecisionsInThisLocation(decisionLocation: IDecisionLocation) {
-    // const decisions: IDecision[] = [];
-    /*const decisionRefs = this.allDecisionLocations
-        .filter(decision => {
-          return decision.point.geohash === decisionLocation.point.geohash;
-        })
-        .forEach(location => {
-          location.decisionRef.get()
-            .then(documentSnapshot => {
-              decisions.push(documentSnapshot.data() as IDecision);
-            });
-        });*/
     const decisionRefs$ = this.allDecisionLocations
-      .filter(decision => {
-        return decision.point.geohash === decisionLocation.point.geohash;
+      .filter(item => {
+        return (item.point.geohash === decisionLocation.point.geohash) && (item.id !== decisionLocation.id);
       })
       .map(location => {
         return fromPromise(location.decisionRef.get());
@@ -84,7 +73,6 @@ export class DecisionMarkerModalComponent implements OnInit {
             return documentSnapshot.data() as IDecision;
           });
         }),
-        // tap(res => console.log({otherDecisions: res}))
       );
   }
 }

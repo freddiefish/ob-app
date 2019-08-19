@@ -12,7 +12,6 @@ import {takeWhile} from 'rxjs/operators';
 export class HomeComponent implements OnInit, OnDestroy {
 
   private alive = true;
-  // @ViewChild(DecisionMarkerModalComponent, {static: true}) decisionMarkerModal: DecisionMarkerModalComponent;
 
   constructor(public dialog: MatDialog) { }
 
@@ -20,11 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openStreetView($event: IDecisionMarkerSelected) {
-    // this.decisionMarkerModal.decisionLocation = $event.selectedDecisionLocation;
-    // this.decisionMarkerModal.allDecisionLocations = $event.allDecisionLocations;
-    //
-    // this.modalService.open(this.decisionMarkerModal.modalId);
-
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(DecisionMarkerModalComponent, {});
     dialogRef.afterOpened()
@@ -32,8 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         takeWhile(_ => this.alive),
       )
       .subscribe(() => {
-        dialogRef.componentInstance.decisionLocation = $event.selectedDecisionLocation;
         dialogRef.componentInstance.allDecisionLocations = $event.allDecisionLocations;
+        dialogRef.componentInstance.decisionLocation = $event.selectedDecisionLocation;
       });
   }
 
