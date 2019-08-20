@@ -1,11 +1,11 @@
 <ng-container *ngIf="decisionLocation?.id">
 
   <h1 mat-dialog-title>
-    <ng-container *ngIf="otherDecisionsInThisLocation$ | async; let otherDecisionsInThisLocation">
+    <ng-container *ngIf="decisionsInThisLocation$ | async; let decisionsInThisLocation">
       <button mat-icon-button
-              *ngIf="otherDecisionsInThisLocation.length"
+              *ngIf="decisionsInThisLocation?.length > 1"
               [matMenuTriggerFor]="otherDecisions"
-              [matMenuTriggerData]="{decisions: otherDecisionsInThisLocation}">
+              [matMenuTriggerData]="{decisions: decisionsInThisLocation}">
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </ng-container>
@@ -17,36 +17,42 @@
   <mat-dialog-content>
     <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view>
 
-    <p style="text-align: right;">
-      Date {{decision?.date | date: 'dd/MM/yyyy'}} <br>
-      <a class="more-info-url"
-         *ngIf="decision?.url"
-         target="_blank"
-         href="{{decision?.url}}">
-        more info url <i class="material-icons">link</i>
-      </a>
-    </p>
+    <ng-container *ngIf="decision">
+      <p style="text-align: right;">
+        Date {{decision.date | date: 'dd/MM/yyyy'}} <br>
+        <a class="more-info-url"
+           *ngIf="decision.url"
+           target="_blank"
+           href="{{decision.url}}">
+          more info url <i class="material-icons">link</i>
+        </a>
+      </p>
 
-    <!-- BACKGROUND -->
-    <p style="font-weight: bold">Background</p>
-    <app-read-more [content]="decision?.background"></app-read-more>
+      <!-- BACKGROUND -->
+      <p style="font-weight: bold">Background</p>
+      <app-read-more [content]="decision.background"></app-read-more>
 
-    <!-- HOW -->
-    <p style="font-weight: bold">How</p>
-    <app-read-more [content]="decision?.decision"></app-read-more>
+      <!-- HOW -->
+      <p style="font-weight: bold">How</p>
+      <app-read-more [content]="decision.decision"></app-read-more>
+    </ng-container>
+
   </mat-dialog-content>
 
 </ng-container>
 
 <mat-menu #otherDecisions="matMenu">
   <ng-template matMenuContent let-decisions="decisions">
-    <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length}} more decisions on this location:</p>
-    <button *ngFor="let decision of decisions"
-            mat-menu-item
-            (click)="setDecision(decision)">
+    <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length && decisions.length - 1}} more decision{{decisions?.length > 2 ? 's' : ''}} on this location:</p>
+    <ng-container *ngFor="let item of decisions">
+      <ng-container *ngIf="item.id !== decision.id">
+        <button mat-menu-item
+                (click)="setDecision(item)">
 
-      {{decision.date | date}} {{decision.title}}
+          {{item.date | date}} {{item.title}}
 
-    </button>
+        </button>
+      </ng-container>
+    </ng-container>
   </ng-template>
 </mat-menu>

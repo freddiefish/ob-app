@@ -15,3 +15,7 @@ app-street-view {
     vertical-align: middle;
   }
 }
+
+::ng-deep mat-dialog-container {
+  width: 100vw !important;
+}
