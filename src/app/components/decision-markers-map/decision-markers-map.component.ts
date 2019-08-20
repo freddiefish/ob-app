@@ -10,8 +10,6 @@ import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.mod
 import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-maps-types';
 import {GeoFirePoint} from 'geofirex';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
-import {fromArray} from 'rxjs/internal/observable/fromArray';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-decision-markers-map',
@@ -21,11 +19,11 @@ import {environment} from '../../../environments/environment';
 export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   // TODO: Revert this
-  // private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
-  private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(
+  private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
+  /*private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(
     environment.mockedAntwerpLocation.latitude,
     environment.mockedAntwerpLocation.longitude,
-  );
+  );*/
   private _lastOpen: string;
 
   @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
@@ -43,19 +41,19 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   }
 
   get coordsMap(): Observable<GeoFirePoint> {
-    // return this.locationService.mapCenter;
-    return fromArray([InitializedGeoFireClient.geoFireClient.point(
+    return this.locationService.mapCenter;
+    /*return fromArray([InitializedGeoFireClient.geoFireClient.point(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude,
-    )]);
+    )]);*/
   }
 
   get coordsUser(): Observable<GeoFirePoint> {
-    // return this.locationService.coordinates;
-    return fromArray([InitializedGeoFireClient.geoFireClient.point(
+    return this.locationService.coordinates;
+    /*return fromArray([InitializedGeoFireClient.geoFireClient.point(
       environment.mockedAntwerpLocation.latitude,
       environment.mockedAntwerpLocation.longitude,
-    )]);
+    )]);*/
   }
 
   get decisionLocations$(): Observable<IDecisionLocation[]> {
