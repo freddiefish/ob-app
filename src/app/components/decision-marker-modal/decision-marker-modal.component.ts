@@ -80,10 +80,10 @@ export class DecisionMarkerModalComponent implements OnInit {
             })
             .filter(decision => decision !== null)
             .sort((current, next) => {
-              if ( current.date < next.date ) {
+              if ( current.date > next.date ) {
                 return -1;
               }
-              if ( current.date > next.date ) {
+              if ( current.date < next.date ) {
                 return 1;
               }
               return 0;
