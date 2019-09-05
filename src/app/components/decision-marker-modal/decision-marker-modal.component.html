@@ -21,19 +21,20 @@
       <p style="text-align: right;">
         Date {{decision.date | date: 'dd/MM/yyyy'}} <br>
         <a class="more-info-url"
-           *ngIf="decision.url"
+           *ngIf="decision.published"
            target="_blank"
-           href="{{decision.url}}">
-          more info url <i class="material-icons">link</i>
+           href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download">
+           
+          full text <i class="material-icons">link</i>
         </a>
       </p>
 
       <!-- BACKGROUND -->
-      <p style="font-weight: bold">Background</p>
+      <p style="font-weight: bold">Achtergrond</p>
       <app-read-more [content]="decision.background"></app-read-more>
 
       <!-- HOW -->
-      <p style="font-weight: bold">How</p>
+      <p style="font-weight: bold">Besluit</p>
       <app-read-more [content]="decision.decision"></app-read-more>
     </ng-container>
 
