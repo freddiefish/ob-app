@@ -10,8 +10,8 @@ import {decisionMarkerSampleData, IDecision, IDecisionLocation} from '../models/
 
 @Injectable()
 export class DecisionLocationsService {
-  private _decisionLocationsCollection: GeoFireCollectionRef = InitializedGeoFireClient.geoFireClient.collection('test-locations');
-  private _decisionsCollection: GeoFireCollectionRef = InitializedGeoFireClient.geoFireClient.collection('test-decisions');
+  private _decisionLocationsCollection: GeoFireCollectionRef = InitializedGeoFireClient.geoFireClient.collection('locations');
+  private _decisionsCollection: GeoFireCollectionRef = InitializedGeoFireClient.geoFireClient.collection('decisions');
   private _previousCoords: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
   private _decisionLocations: BehaviorSubject<IDecisionLocation[]> = new BehaviorSubject<IDecisionLocation[]>([]);
 
