@@ -16,6 +16,8 @@ app-street-view {
   }
 }
 
+body { margin: 0 }
+
 ::ng-deep mat-dialog-container {
   width: 100vw !important;
 }
