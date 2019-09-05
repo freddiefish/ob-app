@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.maxHeight = '100vh';
+    dialogConfig.height = '100vh';
     dialogConfig.maxWidth = '100vw';
 
     const dialogRef = this.dialog.open(DecisionMarkerModalComponent, dialogConfig);
