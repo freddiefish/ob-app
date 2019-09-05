@@ -20,7 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   openStreetView($event: IDecisionMarkerSelected) {
     const dialogConfig = new MatDialogConfig();
-    const dialogRef = this.dialog.open(DecisionMarkerModalComponent, {});
+
+    const dialogRef = this.dialog.open(DecisionMarkerModalComponent, {
+      maxWidth: '100vw'
+    });
+
     dialogRef.afterOpened()
       .pipe(
         takeWhile(_ => this.alive),

@@ -11,7 +11,6 @@ import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-map
 import {GeoFirePoint} from 'geofirex';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-decision-markers-map',
@@ -33,7 +32,7 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     position: ControlPosition.TOP_LEFT,
   };
 
-  constructor(public dialog: MatDialog, private locationService: LocationService, private markersService: DecisionLocationsService) { }
+  constructor( private locationService: LocationService, private markersService: DecisionLocationsService) { }
 
   ngOnInit() {
   }
@@ -88,9 +87,6 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
       allDecisionLocations: decisionLocations,
     });
 
-    /* const dialogRef = this.dialog.open(DecisionMarkerModalComponent, {
-      maxWidth: '100vw'
-    }); */
   }
 
   public distance(start: GeoFirePoint, destination: GeoFirePoint): string {

@@ -30,7 +30,7 @@ export class DecisionLocationsService {
   }
 
   private _query(center = this._previousCoords): void {
-    const query = this._decisionLocationsCollection.within(center, 0.5, 'point');
+    const query = this._decisionLocationsCollection.within(center, 1, 'point');
     // this.generateSamplePoints();
 
     query
