@@ -1,4 +1,4 @@
-<agm-map [latitude]="(coordsMap | async)?.latitude"
+<!-- <agm-map [latitude]="(coordsMap | async)?.latitude"
          [longitude]="(coordsMap | async)?.longitude"
          (centerChange)="centerChange($event)"
          (idle)="idle()"
@@ -35,14 +35,20 @@
 
   </agm-marker-cluster>
 
-</agm-map>
+</agm-map>  -->
 
 
-<button class="fab"
+<button mat-fab class="fab"
         (click)="toggleWatch()">
 
   <i class="material-icons">
     {{(updating | async)? 'gps_fixed' : 'gps_off'}}
   </i>
 
+</button>
+
+<button mat-fab class="fab-non-geo">
+  <i class="mdc-fab__icon material-icons">
+    list
+  </i>
 </button>
