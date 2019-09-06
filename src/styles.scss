@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "modal";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+// @import "modal"; OBSOLTE
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 
 agm-map {
@@ -8,26 +8,30 @@ agm-map {
   width: 100vw;
 }
 
-.fab-container {
-  position: fixed;
-  bottom: 1 rem;
-  right: 1 rem;
-  z-index: 100;
-  display: flex;
-}
 
 .fab {
-  
+  position: fixed !important;
+  bottom: 16px;
+  right: 16px;
+  border: none;
+  color: black;
+  background-color: #ffab40;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  padding: 16px 0;
+  margin: auto;
+  box-shadow: 2px 3px 3px 0 rgba(41, 41, 41, .3);
 }
 
 .fab:focus {
-  
+  outline: none;
 }
 
 .fab-non-geo {
   position: fixed !important;
-  left: 15px;
-  bottom: 20px;
+  left: 16px;
+  bottom: 16px;
 }
 
 html, body { height: 100%; }

@@ -16,6 +16,15 @@ export interface IDecision {
   url: string;
 }
 
+export interface IDecisionLocation {
+  id: string;
+  decisionRef: firestore.DocumentReference;
+  point: {
+    geopoint: firestore.GeoPoint;
+    geohash: string;
+  };
+}
+
 export const createDecision = (data: Partial<IDecision>): IDecision => {
   return {
     id: data.id,
@@ -31,15 +40,6 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     url: data.url,
   };
 };
-
-export interface IDecisionLocation {
-  id: string;
-  decisionRef: firestore.DocumentReference;
-  point: {
-    geopoint: firestore.GeoPoint;
-    geohash: string;
-  };
-}
 
 export const decisionMarkerSampleData = [{
   '$key': '0hkdpjvbv3eE5goHUwHw',
