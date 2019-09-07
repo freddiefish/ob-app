@@ -12,11 +12,17 @@ export class DecisionsExpansionListComponent implements OnInit {
 
   @Input()
 
-  decisions: IDecision[];
+  decisions;
 
-  constructor() { }
+  constructor(private decisionsService: DecisionsService) { }
 
   ngOnInit() {
+    this.getDecisions();
   }
+
+  getDecisions = () =>
+    this.decisionsService
+    .getAllDecisions()
+    .subscribe(res => (this.decisions = res))
 
 }

@@ -13,6 +13,8 @@ import { StreetViewComponent } from './components/street-view/street-view.compon
 import { DecisionMarkersMapComponent } from './components/decision-markers-map/decision-markers-map.component';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DecisionMarkerModalComponent } from './components/decision-marker-modal/decision-marker-modal.component';
 // import { ModalComponent } from './components/modal.component';
@@ -24,7 +26,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { DecisionsDialogComponent } from './decisions-dialog/decisions-dialog.component';
 import { DecisionsExpansionListComponent } from './decisions-expansion-list/decisions-expansion-list.component';
 
-firebase.initializeApp(environment.firebase);
+firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -44,8 +46,10 @@ firebase.initializeApp(environment.firebase);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     AgmCoreModule.forRoot({
-      apiKey: environment.firebase.apiKey
+      apiKey: environment.firebaseConfig.apiKey
     }),
     AgmJsMarkerClustererModule,
     EllipsisModule,

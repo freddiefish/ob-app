@@ -3,16 +3,16 @@
         <mat-expansion-panel-header>
 
           <mat-panel-title>
-            {{decision.title}}
+            {{decision.payload.doc.data().title}}
           </mat-panel-title>
           
           <mat-panel-description>
-            {{decision.date}}    {{decision.groupName}}
+            {{decision.payload.doc.data().date}}    {{decision.payload.doc.data().groupName}}
           </mat-panel-description>
 
         </mat-expansion-panel-header>
       
-        <p>{{decision.decision}}</p>
+        <p>{{decision.payload.doc.data().decision}}</p>
 
         <mat-action-row class="decision-actions">
                 
