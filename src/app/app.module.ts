@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 
 import { LocationService } from './services/location.service';
 import { DecisionLocationsService } from './services/decision-locations.service';
+import { DecisionsService } from './services/decisions.service';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { StreetViewComponent } from './components/street-view/street-view.component';
 import { DecisionMarkersMapComponent } from './components/decision-markers-map/decision-markers-map.component';
@@ -19,6 +20,9 @@ import { ReadMoreComponent } from './components/read-more.component';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { DecisionsDialogComponent } from './decisions-dialog/decisions-dialog.component';
+import { DecisionsExpansionListComponent } from './decisions-expansion-list/decisions-expansion-list.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -30,9 +34,12 @@ firebase.initializeApp(environment.firebase);
     DecisionMarkersMapComponent,
     DecisionMarkerModalComponent,
     ReadMoreComponent,
+    DecisionsDialogComponent,
+    DecisionsExpansionListComponent,
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
+    DecisionsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,9 @@ firebase.initializeApp(environment.firebase);
   ],
   providers: [
     LocationService,
-    DecisionLocationsService
+    DecisionLocationsService,
+    DecisionsService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {height: '100vh', width: '100vw'}}
   ],
   bootstrap: [AppComponent]
 })

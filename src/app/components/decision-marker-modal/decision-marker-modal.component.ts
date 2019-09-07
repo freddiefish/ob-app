@@ -11,6 +11,7 @@ import {map, tap} from 'rxjs/operators';
   templateUrl: './decision-marker-modal.component.html',
   styleUrls: ['./decision-marker-modal.component.scss']
 })
+
 export class DecisionMarkerModalComponent implements OnInit {
 
   decision: IDecision;
@@ -35,6 +36,7 @@ export class DecisionMarkerModalComponent implements OnInit {
       this.setDecisionsInThisLocation(this.decisionLocation);
     }
   }
+
   get allDecisionLocations() {
     return this._allDecisionLocations;
   }

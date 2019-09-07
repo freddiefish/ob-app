@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, Inject} from '@angular/core';
 import {Geokit, LatLngLiteral} from 'geokit';
 import {Observable} from 'rxjs';
 import {first} from 'rxjs/operators';
@@ -9,8 +9,12 @@ import {IDecisionLocation} from '../../models/decision-marker.model';
 import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.model';
 import {ControlPosition, ZoomControlOptions} from '@agm/core/services/google-maps-types';
 import {GeoFirePoint} from 'geofirex';
+import {IDecision} from '../../models/decision-marker.model';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
+import {DecisionsDialogComponent} from '../../decisions-dialog/decisions-dialog.component';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+
 
 @Component({
   selector: 'app-decision-markers-map',
@@ -32,7 +36,11 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     position: ControlPosition.TOP_LEFT,
   };
 
-  constructor( private locationService: LocationService, private markersService: DecisionLocationsService) { }
+  constructor(
+    private locationService: LocationService,
+    private markersService: DecisionLocationsService,
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DEFAULT_OPTIONS) public defaultOptions: any) { }
 
   ngOnInit() {
   }
@@ -87,6 +95,17 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
       allDecisionLocations: decisionLocations,
     });
 
+  }
+
+  public openNonGeoDecisionList($event: IDecision) {
+
+    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent, this.defaultOptions);
+
+    dialogNonGeoRef.afterOpened()
+    .subscribe(result => {
+      // dialogNonGeoRef.componentInstance.allNonGeoDecisions = $event.allNonGeoDecisions;
+      console.log('Dialog result: ', result);
+    });
   }
 
   public distance(start: GeoFirePoint, destination: GeoFirePoint): string {

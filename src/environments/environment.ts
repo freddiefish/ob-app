@@ -13,5 +13,4 @@ export const environment = {
     messagingSenderId: '830598661992'
   },
 
-  mockedAntwerpLocation: {latitude: 51.26578178, longitude: 4.5324719},
 };
