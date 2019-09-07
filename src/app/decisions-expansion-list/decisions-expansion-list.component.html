@@ -1,0 +1,29 @@
+<mat-expansion-panel *ngFor="let decision of decisions" class="decision-expansion mat-elevation-z10">
+
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            {{decision.title}}
+          </mat-panel-title>
+          
+          <mat-panel-description>
+            {{decision.date}}    {{decision.groupName}}
+          </mat-panel-description>
+
+        </mat-expansion-panel-header>
+      
+        <p>{{decision.decision}}</p>
+
+        <mat-action-row class="decision-actions">
+                
+                <a button mat-button class="mat-raised-button mat-primary">
+                    Vraag volledige tekst
+                </a>
+
+                <a button mat-button class="mat-raised-button">
+                    Volledige tekst
+                </a>
+
+        </mat-action-row>
+      
+</mat-expansion-panel>
