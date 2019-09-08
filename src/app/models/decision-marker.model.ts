@@ -11,14 +11,15 @@ export interface IDecision {
   fullText: string;
   groupId: string;
   groupName: string;
+  hasGeoData: boolean;
   published: boolean;
   title: string;
-  url: string;
 }
 
 export interface IDecisionLocation {
   id: string;
   decisionRef: firestore.DocumentReference;
+  formattedAddress: string;
   point: {
     geopoint: firestore.GeoPoint;
     geohash: string;
@@ -35,8 +36,8 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     fullText: data.fullText,
     groupId: data.groupId,
     groupName: data.groupName,
+    hasGeoData: data.hasGeoData,
     published: data.published,
-    title: data.title,
-    url: data.url,
+    title: data.title
   };
 };

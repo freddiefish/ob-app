@@ -23,8 +23,8 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
-import { DecisionsDialogComponent } from './decisions-dialog/decisions-dialog.component';
-import { DecisionsExpansionListComponent } from './decisions-expansion-list/decisions-expansion-list.component';
+import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
+import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 

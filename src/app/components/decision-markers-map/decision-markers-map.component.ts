@@ -12,7 +12,7 @@ import {GeoFirePoint} from 'geofirex';
 import {IDecision} from '../../models/decision-marker.model';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
-import {DecisionsDialogComponent} from '../../decisions-dialog/decisions-dialog.component';
+import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.component';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 
 
