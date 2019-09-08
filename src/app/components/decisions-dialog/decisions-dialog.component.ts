@@ -21,8 +21,14 @@ export class DecisionsDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.decisions$ = this.decisionsService.getAllDecisions();
+    this.reloadDecisions();
   }
+
+  reloadDecisions(): void {
+    this.decisions$ = this.decisionsService.getAllDecisions();
+      // .subscribe(decisions => console.log(decisions));
+  }
+
 
   closeDialog() {
     this.dialogRef.close();

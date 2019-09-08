@@ -1,20 +1,22 @@
 <h2 mat-dialog-title>
     Algemene besluiten
-    
-    <button mat-button mat-dialog-close (click)="closeDialog()" aria-label="close-button">
-            <i class="material-icons close-button">close</i>
-    </button>   
+    <button mat-button mat-dialog-close (click)="closeDialog()" aria-label="close-button" class="close-button">
+        <i class="material-icons close-button">close</i>
+</button> 
+     
 </h2>
+
+ 
 
 <mat-dialog-content>
 
         <mat-accordion>
-    <app-decisions-expansion-list [decisions]="decisions$">
 
-    
+            <app-decisions-expansion-list [decisions]="decisions$ | async">
 
-    </app-decisions-expansion-list>
 
-</mat-accordion>
+            </app-decisions-expansion-list>
+
+    </mat-accordion>
 
 </mat-dialog-content>

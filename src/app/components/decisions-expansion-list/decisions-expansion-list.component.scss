@@ -1,7 +1,15 @@
 .decision-expansion {
-
+    margin: 20px;
 }
 
 .decision-actions {
     text-align: right;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+::ng-deep .mat-expansion-panel-header{
+    margin: 20px;
 }

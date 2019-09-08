@@ -7,7 +7,7 @@
           </mat-panel-title>
           
           <mat-panel-description>
-            {{decision.date}}    {{decision.groupName}}
+              {{ decision.date.toDate() | date: 'shortDate'  }} {{decision.groupName}}
           </mat-panel-description>
 
         </mat-expansion-panel-header>
@@ -16,11 +16,14 @@
 
         <mat-action-row class="decision-actions">
                 
+                <div *ngIf="!decision.published">
+
                 <a button mat-button class="mat-raised-button mat-primary">
                     Vraag volledige tekst
                 </a>
-
-                <a button mat-button class="mat-raised-button">
+              </div>
+            
+                <a href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button class="mat-raised-button">
                     Volledige tekst
                 </a>
 
