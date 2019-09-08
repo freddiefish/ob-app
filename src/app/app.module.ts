@@ -23,6 +23,7 @@ import { EllipsisModule } from 'ngx-ellipsis';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS , MAT_DATE_LOCALE } from '@angular/material';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
 import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
 
@@ -54,7 +55,8 @@ firebase.initializeApp(environment.firebaseConfig);
     AgmJsMarkerClustererModule,
     EllipsisModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ScrollingModule
   ],
   providers: [
     LocationService,

@@ -1,32 +1,40 @@
-<mat-expansion-panel *ngFor="let decision of decisions" class="decision-expansion mat-elevation-z10">
+<cdk-virtual-scroll-viewport itemSize="100" (scrolledIndexChange)="listMoreDecisions($event)">
 
-        <mat-expansion-panel-header>
+  <li *cdkVirtualFor="let decision of decisions">
 
-          <mat-panel-title>
-            {{decision.title}}
-          </mat-panel-title>
+    <mat-expansion-panel  class="decision-expansion mat-elevation-z10">
+
+            <mat-expansion-panel-header>
+
+              <mat-panel-title>
+                {{decision.title}}
+              </mat-panel-title>
+              
+              <mat-panel-description>
+                  {{ decision.date.toDate() | date: 'shortDate'  }} {{decision.groupName}}
+              </mat-panel-description>
+
+            </mat-expansion-panel-header>
           
-          <mat-panel-description>
-              {{ decision.date.toDate() | date: 'shortDate'  }} {{decision.groupName}}
-          </mat-panel-description>
+            <p>{{decision.decision}}</p>
 
-        </mat-expansion-panel-header>
-      
-        <p>{{decision.decision}}</p>
+            <mat-action-row class="decision-actions">
+                    
+                    <div *ngIf="!decision.published">
 
-        <mat-action-row class="decision-actions">
+                    <a button mat-button class="mat-raised-button mat-primary">
+                        Vraag volledige tekst
+                    </a>
+                  </div>
                 
-                <div *ngIf="!decision.published">
+                    <a href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button class="mat-raised-button">
+                        Volledige tekst
+                    </a>
 
-                <a button mat-button class="mat-raised-button mat-primary">
-                    Vraag volledige tekst
-                </a>
-              </div>
-            
-                <a href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button class="mat-raised-button">
-                    Volledige tekst
-                </a>
+            </mat-action-row>
+          
+    </mat-expansion-panel>
 
-        </mat-action-row>
-      
-</mat-expansion-panel>
+  </li>
+
+</cdk-virtual-scroll-viewport>

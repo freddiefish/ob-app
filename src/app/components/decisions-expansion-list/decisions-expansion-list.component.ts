@@ -18,4 +18,8 @@ export class DecisionsExpansionListComponent implements OnInit {
   ngOnInit() {
   }
 
+  listMoreDecisions(event) {
+    
+  }
+
 }
