@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebase: {
+  firebaseConfig: {
     apiKey: 'AIzaSyA1szgUlN-GUaEfegJ3CZS_TAPLXDVwRO8',
     authDomain: 'ob-app-db2b6.firebaseapp.com',
     databaseURL: 'https://geofirestore.firebaseio.com',

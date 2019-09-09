@@ -5,11 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyA1szgUlN-GUaEfegJ3CZS_TAPLXDVwRO8',
-    authDomain: 'ob-app-db2b6.firebaseapp.com',
-    databaseURL: 'https://geofirestore.firebaseio.com',
-    projectId: 'ob-app-db2b6',
-    storageBucket: 'geofirestore.appspot.com',
-    messagingSenderId: '830598661992'
+    apiKey: 'AIzaSyBPUSySaUbvQ_7t10vhJ2VFv4HXJC1A7cw',
+    authDomain: 'ob-app-dev-252415.firebaseapp.com',
+    databaseURL: 'https://ob-app-dev-252415.firebaseio.com',
+    projectId: 'ob-app-dev-252415',
+    storageBucket: 'ob-app-dev-252415.appspot.com',
+    messagingSenderId: '1024346721563',
+    appId: '1:1024346721563:web:da1b5efcc22d17ef18d7be'
   },
 };
