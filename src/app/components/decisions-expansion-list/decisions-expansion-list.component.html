@@ -1,15 +1,16 @@
 <ng-container *ngIf="infinite | async as decisions">
 
-  <cdk-virtual-scroll-viewport itemSize="100" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length-1].title))">
+    <mat-accordion>
+  
+  <cdk-virtual-scroll-viewport itemSize="100" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length - 1].date))">
+    
 
-    <li *cdkVirtualFor="let d of decisions, let i = index; trackBy: trackByIdx" class="animated lightSpeedIn">
-
-      <mat-expansion-panel  class="decision-expansion mat-elevation-z10">
+      <mat-expansion-panel *cdkVirtualFor="let d of decisions, let i = index; trackBy: trackByIdx" class="animated lightSpeedIn" class="decision-expansion mat-elevation-z10">
 
               <mat-expansion-panel-header>
 
                 <mat-panel-title>
-                  {{ i }}  {{d.title}}
+                  {{d.title}}
                 </mat-panel-title>
                 
                 <mat-panel-description>
@@ -37,11 +38,15 @@
             
       </mat-expansion-panel>
 
-    </li>
+    
 
     <iframe style="margin: 0 auto; display: flex" *ngIf="theEnd" src="https://giphy.com/embed/lD76yTC5zxZPG" width="480"
     height="352" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
   </cdk-virtual-scroll-viewport>
+
+</mat-accordion>
+
+  
 
 </ng-container>

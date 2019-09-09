@@ -14,6 +14,7 @@ export interface IDecision {
   hasGeoData: boolean;
   published: boolean;
   title: string;
+  sortIndex1: string;
 }
 
 export interface IDecisionLocation {
@@ -38,6 +39,7 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     groupName: data.groupName,
     hasGeoData: data.hasGeoData,
     published: data.published,
-    title: data.title
+    title: data.title,
+    sortIndex1: data.sortIndex1
   };
 };

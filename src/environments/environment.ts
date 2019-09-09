@@ -12,5 +12,4 @@ export const environment = {
     storageBucket: 'geofirestore.appspot.com',
     messagingSenderId: '830598661992'
   },
-
 };
