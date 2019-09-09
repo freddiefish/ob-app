@@ -1,0 +1,52 @@
+<ng-container *ngIf="infinite | async as decisions">
+
+    <mat-accordion>
+  
+  <cdk-virtual-scroll-viewport itemSize="100" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length - 1].date))">
+    
+
+      <mat-expansion-panel *cdkVirtualFor="let d of decisions, let i = index; trackBy: trackByIdx" class="animated lightSpeedIn" class="decision-expansion mat-elevation-z10">
+
+              <mat-expansion-panel-header>
+
+                <mat-panel-title>
+                  {{d.title}}
+                </mat-panel-title>
+                
+                <mat-panel-description>
+                    {{ d.date.toDate() | date: 'shortDate'  }} {{d.groupName}}
+                </mat-panel-description>
+
+              </mat-expansion-panel-header>
+            
+              <p>{{d.decision}}</p>
+
+              <mat-action-row class="decision-actions">
+                      
+                      <div *ngIf="!d.published">
+
+                      <a button mat-button class="mat-raised-button mat-primary">
+                          Vraag volledige tekst
+                      </a>
+                    </div>
+                  
+                      <a href="https://ebesluit.antwerpen.be/publication/{{d.docId}}/download" button mat-button class="mat-raised-button">
+                          Volledige tekst
+                      </a>
+
+              </mat-action-row>
+            
+      </mat-expansion-panel>
+
+    
+
+    <iframe style="margin: 0 auto; display: flex" *ngIf="theEnd" src="https://giphy.com/embed/lD76yTC5zxZPG" width="480"
+    height="352" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+  </cdk-virtual-scroll-viewport>
+
+</mat-accordion>
+
+  
+
+</ng-container>

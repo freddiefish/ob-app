@@ -1,6 +1,7 @@
 <ng-container *ngIf="decisionLocation?.id">
 
   <h1 mat-dialog-title>
+
     <ng-container *ngIf="decisionsInThisLocation$ | async; let decisionsInThisLocation">
       <button mat-icon-button
               *ngIf="decisionsInThisLocation?.length > 1"
@@ -11,13 +12,17 @@
     </ng-container>
 
     {{decision?.title}}
+
     <i style="cursor: pointer" (click)="closeModal();" class="material-icons close-button">close</i>
+
   </h1>
 
-  <mat-dialog-content>
+  
+
     <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view>
 
     <ng-container *ngIf="decision">
+      
       <p style="text-align: right;">
         Date {{decision.date | date: 'dd/MM/yyyy'}} <br>
         <a class="more-info-url"
@@ -36,24 +41,38 @@
       <!-- HOW -->
       <p style="font-weight: bold">Besluit</p>
       <app-read-more [content]="decision.decision"></app-read-more>
+
     </ng-container>
 
-  </mat-dialog-content>
+
 
 </ng-container>
 
+
+
 <mat-menu #otherDecisions="matMenu">
-  <ng-template matMenuContent let-decisions="decisions">
-    <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length && decisions.length - 1}} more decision{{decisions?.length > 2 ? 's' : ''}} on this location:</p>
-    <ng-container *ngFor="let item of decisions">
-      <ng-container *ngIf="item.id !== decision.id">
-        <button mat-menu-item
-                (click)="setDecision(item)">
 
-          {{item.date | date}} {{item.title}}
-
-        </button>
+    <ng-template matMenuContent let-decisions="decisions">
+  
+      <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length && decisions.length - 1}} meer besluiten{{decisions?.length > 2 ? 's' : ''}} op deze locatie:</p>
+  
+      <ng-container *ngFor="let item of decisions">
+  
+        <ng-container *ngIf="item.id !== decision.id">
+  
+          <button mat-menu-item
+                  (click)="setDecision(item)">
+  
+            {{item.date | date}} {{item.title}}
+  
+          </button>
+  
+        </ng-container>
+  
       </ng-container>
-    </ng-container>
-  </ng-template>
-</mat-menu>
+  
+    </ng-template>
+  
+  </mat-menu>
+  
+  

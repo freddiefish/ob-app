@@ -1,13 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-//@import "modal";
+// @import "modal"; OBSOLTE
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 
 agm-map {
   height: 100vh;
   width: 100vw;
 }
 
+
 .fab {
-  position: fixed;
+  position: fixed !important;
   bottom: 16px;
   right: 16px;
   border: none;
@@ -23,6 +26,12 @@ agm-map {
 
 .fab:focus {
   outline: none;
+}
+
+.fab-non-geo {
+  position: fixed !important;
+  left: 16px;
+  bottom: 16px;
 }
 
 html, body { height: 100%; }

@@ -4,14 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: 'AIzaSyA1szgUlN-GUaEfegJ3CZS_TAPLXDVwRO8',
-    authDomain: 'ob-app-db2b6.firebaseapp.com',
-    databaseURL: 'https://geofirestore.firebaseio.com',
-    projectId: 'ob-app-db2b6',
-    storageBucket: 'geofirestore.appspot.com',
-    messagingSenderId: '830598661992'
+  firebaseConfig: {
+    apiKey: 'AIzaSyBPUSySaUbvQ_7t10vhJ2VFv4HXJC1A7cw',
+    authDomain: 'ob-app-dev-252415.firebaseapp.com',
+    databaseURL: 'https://ob-app-dev-252415.firebaseio.com',
+    projectId: 'ob-app-dev-252415',
+    storageBucket: 'ob-app-dev-252415.appspot.com',
+    messagingSenderId: '1024346721563',
+    appId: '1:1024346721563:web:da1b5efcc22d17ef18d7be'
   },
-
-  mockedAntwerpLocation: {latitude: 51.26578178, longitude: 4.5324719},
 };

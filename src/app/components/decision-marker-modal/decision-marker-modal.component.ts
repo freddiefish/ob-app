@@ -11,12 +11,14 @@ import {map, tap} from 'rxjs/operators';
   templateUrl: './decision-marker-modal.component.html',
   styleUrls: ['./decision-marker-modal.component.scss']
 })
+
 export class DecisionMarkerModalComponent implements OnInit {
 
   decision: IDecision;
   decisionsInThisLocation$: Observable<IDecision[]>;
 
   private _decisionLocation: IDecisionLocation = null;
+
   @Input() set decisionLocation(decisionLocation: IDecisionLocation) {
     this._decisionLocation = decisionLocation;
     // this.setDecisionByDecisionRef(decisionLocation.decisionRef);
@@ -24,17 +26,20 @@ export class DecisionMarkerModalComponent implements OnInit {
       this.setDecisionsInThisLocation(decisionLocation);
     }
   }
+
   get decisionLocation() {
     return this._decisionLocation;
   }
 
   private _allDecisionLocations: IDecisionLocation[] = [];
+
   @Input() set allDecisionLocations(locations: IDecisionLocation[]) {
     this._allDecisionLocations = locations;
     if (this.decisionLocation) {
       this.setDecisionsInThisLocation(this.decisionLocation);
     }
   }
+
   get allDecisionLocations() {
     return this._allDecisionLocations;
   }
@@ -62,6 +67,7 @@ export class DecisionMarkerModalComponent implements OnInit {
   }
 
   private setDecisionsInThisLocation(decisionLocation: IDecisionLocation) {
+
     const decisionRefs$ = this.allDecisionLocations
       .filter(item => {
         return (item.point.geohash === decisionLocation.point.geohash);
@@ -69,6 +75,7 @@ export class DecisionMarkerModalComponent implements OnInit {
       .map(location => {
         return fromPromise(location.decisionRef.get());
       });
+
     this.decisionsInThisLocation$ = combineLatest(decisionRefs$)
       .pipe(
         map((documentSnapshots) => {
