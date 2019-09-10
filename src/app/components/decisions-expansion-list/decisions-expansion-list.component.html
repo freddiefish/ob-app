@@ -25,7 +25,7 @@
                       
                       <div *ngIf="!d.published">
 
-                        <a button mat-button class="mat-raised-button mat-primary" (click)="askFullText()">
+                        <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{d.groupName}}: {{d.title}}%0D%0A%0D%0ADank u,%0D%0A%0D%0AFrederik Feys%0D%0A0488 020 010%0D%0AKapucinessenstraat 12%0D%0A2000 Antwerpen" button mat-button class="mat-raised-button mat-primary" (click)="askFullText()">
                             Vraag volledige tekst
                         </a>
 
