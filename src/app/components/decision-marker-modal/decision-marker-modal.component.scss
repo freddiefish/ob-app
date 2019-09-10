@@ -1,3 +1,7 @@
+.mat-dialog-container{
+  
+}
+
 app-street-view {
   ::ng-deep {
     #street-view-pano {
@@ -14,10 +18,4 @@ app-street-view {
   i {
     vertical-align: middle;
   }
-}
-
-body { margin: 0 }
-
-::ng-deep mat-dialog-container {
-  width: 100vw !important;
 }

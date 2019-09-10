@@ -24,6 +24,8 @@ export class DecisionsExpansionListComponent implements OnInit {
   offset = new BehaviorSubject('2019-09-09T08:31:03.800623Z19.0906.8447.6787');
   infinite: Observable<any[]>;
 
+  msg: string;
+
   constructor(private db: AngularFirestore) {
    const batchMap = this.offset.pipe(
       throttleTime(500),
@@ -86,6 +88,12 @@ export class DecisionsExpansionListComponent implements OnInit {
   trackByIdx(i) {
     return i;
   }
+
+  askFullText() {
+    this.msg = 'Button is Clicked';
+    console.log( this.msg );
+  }
+
 
   ngOnInit() {
   }
