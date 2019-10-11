@@ -1,0 +1,9 @@
+<div>
+    <input type="text" [(ngModel)]="searchValue" (ngModelChange)="search($event)">
+    <div class="search-results">
+        <div class="search-result" *ngFor="let result of results | async">
+            {{ result.title }}
+        </div>
+    </div>
+</div>
+

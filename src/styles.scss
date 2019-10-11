@@ -38,5 +38,11 @@ agm-map {
   bottom: 16px;
 }
 
+.search-box {
+  position: fixed !important;
+  left: 16px;
+  top: 16px;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

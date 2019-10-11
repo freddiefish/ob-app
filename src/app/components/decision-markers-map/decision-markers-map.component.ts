@@ -14,6 +14,7 @@ import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-clie
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
 import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.component';
 import {MatDialog } from '@angular/material';
+import {SearchComponent} from '../search/search.component';
 
 
 @Component({
