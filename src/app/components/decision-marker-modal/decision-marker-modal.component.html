@@ -24,26 +24,28 @@
     <ng-container *ngIf="decision">
       
       <p style="text-align: right;">
-        Date {{decision.date | date: 'dd/MM/yyyy'}} <br>
+        {{ decision.groupName }}<br>
+        {{decision.date | date: 'dd/MM/yyyy'}} <br>
         <a class="more-info-url"
            *ngIf="decision.published"
            target="_blank"
-           href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download">
-           
+           href="https://storage.cloud.google.com/ob-app-dev-252415.appspot.com/pubs/_besluit_{{decision.docId}}.pdf">
           full text <i class="material-icons">link</i>
         </a>
       </p>
 
-      <!-- BACKGROUND -->
-      <p style="font-weight: bold">Achtergrond</p>
-      <app-read-more [content]="decision.background"></app-read-more>
-
       <!-- HOW -->
-      <p style="font-weight: bold">Besluit</p>
-      <app-read-more [content]="decision.decision"></app-read-more>
+      <h3>Besluit</h3>
+      <div *ngIf="!decision.decision.text">
+          <p>{{decision.decision.text}}</p>
+      </div>
+      
+      <div *ngFor="let h of decision.decision.headings">
+        <h4>{{h.name}}</h4>
+        <p>{{h.text}}</p>
+      </div>
 
     </ng-container>
-
 
 
 </ng-container>

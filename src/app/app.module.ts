@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,10 +23,11 @@ import { ReadMoreComponent } from './components/read-more.component';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { MAT_DIALOG_DEFAULT_OPTIONS , MAT_DATE_LOCALE } from '@angular/material';
+import { MAT_DATE_LOCALE } from '@angular/material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
 import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
+import { SearchComponent } from './components/search/search.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -39,6 +41,7 @@ firebase.initializeApp(environment.firebaseConfig);
     ReadMoreComponent,
     DecisionsDialogComponent,
     DecisionsExpansionListComponent,
+    SearchComponent,
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
@@ -47,6 +50,7 @@ firebase.initializeApp(environment.firebaseConfig);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AgmCoreModule.forRoot({
@@ -62,7 +66,6 @@ firebase.initializeApp(environment.firebaseConfig);
     LocationService,
     DecisionLocationsService,
     DecisionsService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {height: '100vh', width: '100vw'}},
     {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'}
   ],
   bootstrap: [AppComponent]

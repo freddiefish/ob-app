@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, Inject} from '@angular/core';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
 import {IDecisionMarkerSelected} from '../../models/decision-marker-selected.model';
 import {IDecision} from '../../models/decision-marker.model';
-import {MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {takeWhile} from 'rxjs/operators';
 
 @Component({
@@ -16,15 +16,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DEFAULT_OPTIONS) public defaultOptions: any) { }
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit() {
   }
 
   openStreetView($event: IDecisionMarkerSelected) {
 
-    const dialogLocationRef = this.dialog.open(DecisionMarkerModalComponent, this.defaultOptions);
+    const dialogLocationRef = this.dialog.open(DecisionMarkerModalComponent, {  height: '100vh',
+    minWidth: '100vw'});
 
     dialogLocationRef.afterOpened()
       .pipe(

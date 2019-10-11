@@ -2,6 +2,10 @@
 // @import "modal"; OBSOLTE
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+.app-full-bleed-dialog .mat-dialog-container{
+  background-color: #40ff89;
+  padding: 0px;
+}
 
 agm-map {
   height: 100vh;
@@ -32,6 +36,12 @@ agm-map {
   position: fixed !important;
   left: 16px;
   bottom: 16px;
+}
+
+.search-box {
+  position: fixed !important;
+  left: 16px;
+  top: 16px;
 }
 
 html, body { height: 100%; }

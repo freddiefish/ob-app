@@ -4,17 +4,22 @@ import Timestamp = firebase.firestore.Timestamp;
 
 export interface IDecision {
   id: string;
-  background: string;
+  addenda?: any;
+  assocDocs?: any;
   date: string;
-  decision: string;
+  decision?: any;
   docId: string;
-  fullText: string;
+  financialConseq?: boolean;
+  financialStakeholders?: any;
   groupId: string;
   groupName: string;
   hasGeoData: boolean;
+  intId: string;
+  offTitle: string;
   published: boolean;
-  title: string;
   sortIndex1: string;
+  textParts?: any;
+  title: string;
 }
 
 export interface IDecisionLocation {
@@ -30,16 +35,21 @@ export interface IDecisionLocation {
 export const createDecision = (data: Partial<IDecision>): IDecision => {
   return {
     id: data.id,
-    background: data.background,
-    date: (data.date as any).toDate(),
+    addenda: data.addenda,
+    assocDocs: data.assocDocs,
+    date: data.date,
     decision: data.decision,
     docId: data.docId,
-    fullText: data.fullText,
+    financialConseq: data.financialConseq,
+    financialStakeholders: data.financialStakeholders,
     groupId: data.groupId,
     groupName: data.groupName,
     hasGeoData: data.hasGeoData,
+    intId: data.intId,
+    offTitle: data.offTitle,
     published: data.published,
-    title: data.title,
-    sortIndex1: data.sortIndex1
+    sortIndex1: data.sortIndex1,
+    textParts: data.textParts,
+    title: data.title
   };
 };

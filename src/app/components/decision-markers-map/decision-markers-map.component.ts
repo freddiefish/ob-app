@@ -13,7 +13,8 @@ import {IDecision} from '../../models/decision-marker.model';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
 import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.component';
-import {MatDialog, MatDialogConfig, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {MatDialog } from '@angular/material';
+import {SearchComponent} from '../search/search.component';
 
 
 @Component({
@@ -39,8 +40,7 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   constructor(
     private locationService: LocationService,
     private markersService: DecisionLocationsService,
-    public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DEFAULT_OPTIONS) public defaultOptions: any) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -99,7 +99,8 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   public openNonGeoDecisionList($event: IDecision) {
 
-    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent, this.defaultOptions);
+    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent , { height: '100vh',
+    minWidth: '100vw', panelClass: 'app-full-bleed-dialog' });
 
     dialogNonGeoRef.afterOpened()
     .subscribe(result => {
