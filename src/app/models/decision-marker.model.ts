@@ -18,6 +18,7 @@ export interface IDecision {
   offTitle: string;
   published: boolean;
   sortIndex1: string;
+  status: string;
   textParts?: any;
   title: string;
 }
@@ -49,6 +50,7 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     offTitle: data.offTitle,
     published: data.published,
     sortIndex1: data.sortIndex1,
+    status: data.status,
     textParts: data.textParts,
     title: data.title
   };

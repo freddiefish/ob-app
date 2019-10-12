@@ -11,19 +11,22 @@
       </button>
     </ng-container>
 
-    {{decision?.title}}
+  
+    {{decision?.title | uppercase}}
 
     <i style="cursor: pointer" (click)="closeModal();" class="material-icons close-button">close</i>
 
   </h1>
 
-  
+   <!-- <p>item json pipe: {{decision | json}}</p> -->
+
 
     <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view>
 
     <ng-container *ngIf="decision">
       
       <p style="text-align: right;">
+        {{ decision.status | uppercase }} <br>
         {{ decision.groupName }}<br>
         {{decision.date | date: 'dd/MM/yyyy'}} <br>
         <a class="more-info-url"
@@ -34,9 +37,16 @@
         </a>
       </p>
 
-      <!-- HOW -->
+      <div *ngIf="decision.financialStakeholders">
+          <h3>Belanghebbenden</h3>
+        <ul>
+          <li *ngFor="let stakeHolder of decision.financialStakeholders">
+              {{stakeHolder.Name}}, {{stakeHolder.JuridicalForm}} <a href="https://openthebox.be/company/{{stakeHolder.VAT}}" target="_blank"> <mat-icon> scatter_plot</mat-icon> </a> {{stakeHolder.Amount}} €
+          </li>
+        </ul>
+      </div>
       <h3>Besluit</h3>
-      <div *ngIf="!decision.decision.text">
+      <div *ngIf="decision.decision?.text">
           <p>{{decision.decision.text}}</p>
       </div>
       
@@ -45,6 +55,25 @@
         <p>{{h.text}}</p>
       </div>
 
+      <div *ngIf="decision.addenda">
+          <h3>Bijlagen</h3>
+        <ul>
+          <li *ngFor="let addendum of decision.addenda">
+            {{addendum}}
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="decision.assocDocs">
+          <h3>Gerelateerde besluiten</h3>
+        <ul>
+          <li *ngFor="let assocDoc of decision.assocDocs">
+            {{assocDoc}}
+          </li>
+        </ul>
+      </div>
+      
+    
     </ng-container>
 
 
