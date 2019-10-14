@@ -28,6 +28,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
 import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -42,6 +43,7 @@ firebase.initializeApp(environment.firebaseConfig);
     DecisionsDialogComponent,
     DecisionsExpansionListComponent,
     SearchComponent,
+    FeedbackFormComponent,
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
