@@ -23,11 +23,9 @@
               
               <div *ngIf="d.financialStakeholders">
                   <h3>Belanghebbenden</h3>
-                <ul>
-                  <li *ngFor="let stakeHolder of d.financialStakeholders">
+                <p *ngFor="let stakeHolder of d.financialStakeholders">
                       {{stakeHolder.Name}}, {{stakeHolder.JuridicalForm}} <a href="https://openthebox.be/company/{{stakeHolder.VAT}}" target="_blank"> <mat-icon> scatter_plot</mat-icon> </a> {{stakeHolder.Amount}} €
-                  </li>
-                </ul>
+                </p>
               </div>
               
               <div *ngIf="d.decision?.text">
