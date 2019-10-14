@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DecisionMarkersMapComponent } from './decision-markers-map.component';
 
+
 describe('DecisionMarkersMapComponent', () => {
   let component: DecisionMarkersMapComponent;
   let fixture: ComponentFixture<DecisionMarkersMapComponent>;

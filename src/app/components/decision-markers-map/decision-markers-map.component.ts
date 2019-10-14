@@ -15,6 +15,7 @@ import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-ma
 import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.component';
 import {MatDialog } from '@angular/material';
 import {SearchComponent} from '../search/search.component';
+import {FeedbackFormComponent} from '../feedback-form/feedback-form.component';
 
 
 @Component({
