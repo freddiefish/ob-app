@@ -23,12 +23,18 @@ import { ReadMoreComponent } from './components/read-more.component';
 import { EllipsisModule } from 'ngx-ellipsis';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { EmailValidatorDirective } from './shared/emailvalidator.directive';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
 import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+import { from } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from './services/message.service';
+import { FeedbackService } from './services/feedback.service';
+import { HttpErrorHandler } from './services/http-error-handler.service';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -44,6 +50,7 @@ firebase.initializeApp(environment.firebaseConfig);
     DecisionsExpansionListComponent,
     SearchComponent,
     FeedbackFormComponent,
+    EmailValidatorDirective
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
@@ -58,6 +65,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AgmCoreModule.forRoot({
       apiKey: environment.firebaseConfig.apiKey
     }),
+    HttpClientModule,
     AgmJsMarkerClustererModule,
     EllipsisModule,
     BrowserAnimationsModule,
@@ -68,6 +76,9 @@ firebase.initializeApp(environment.firebaseConfig);
     LocationService,
     DecisionLocationsService,
     DecisionsService,
+    MessageService,
+    FeedbackService,
+    HttpErrorHandler,
     {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'}
   ],
   bootstrap: [AppComponent]

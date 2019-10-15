@@ -1,13 +1,16 @@
 <div [hidden]="submitted" class="feedback-form">
 
     <h2><mat-icon>help</mat-icon> Feedback</h2> 
+    <h3>Bedankt voor het uitproberen van deze app. Via dit formulier kan je jouw bevindingen kwijt. Die gebruik ik voor het verbeteren van de app. </h3>
     <h3>Wat vind je goed? Wat kan beter? 
-        Laat het me weten, jouw mening vind ik belangrijk!</h3>
+        Laat het me weten, jouw mening vind ik belangrijk! <br>
+        Mvg, <br>
+        Frederik Feys</h3>
 
     <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
-            
+             {{diagnostic}} 
         <mat-label>Welke score (0 - 10) geeft u deze app?</mat-label>
-        <mat-slider thumbLabel min="1" max="10" step="1" value="0"
+        <mat-slider (input)="onInputChange($event)"  thumbLabel min="1" max="10" step="1" value="0"
             [(ngModel)]="model.rating" name="rating" ></mat-slider>
         
         <mat-form-field class="field-full-width">
@@ -19,21 +22,24 @@
         <mat-form-field>
             <mat-label>Uw achtergrond</mat-label>
             <mat-select 
-                [(ngModel)]="model.background" name="background">
+                [(ngModel)]="model.background" name="background"
+                (selectionChange)="onSelectionChanged($event)">
                 <mat-option *ngFor="let background of backgrounds" [value]="background.value">{{background.viewValue}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <div [hidden]="otherBackground">
+        <div [hidden]="commonBackground">
         <mat-form-field class="field-full-width">
-            <input matInput placeholder="Wil u specifiëren" type="text"
+            <input matInput placeholder="Welke achtergrond heeft u?" type="text"
                 [(ngModel)]="model.otherBackground" name="otherBackground">
         </mat-form-field>
         </div>
             
         <mat-form-field class="field-full-width">
-                <input matInput placeholder="Email" type="email"
-                [(ngModel)]="model.email" name="email" >
+                <input matInput placeholder="Uw email, als uw op de hoogte wil blijven" type="email"
+                [(ngModel)]="model.email" name="email" 
+                ngModel 
+                appEmailvalidator>
         </mat-form-field>
     
         <button mat-button type="submit" color="primary" 
@@ -43,6 +49,6 @@
 </div>
 
 <div [hidden]="!submitted">
-    <h2>Hartelijk dank</h2>
-    <p>Ik lees uw feedback zodat de app kan verbeteren.</p>
+    <h2>Hartelijk dank voor uw tijd.</h2>
+    <p>Ik lees uw feedback zodat ik de app kan verbeteren.</p>
 </div>
