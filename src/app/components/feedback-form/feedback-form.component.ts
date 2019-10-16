@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from '../../models/feedback';
-import { MatSliderChange, MatSelectChange } from '@angular/material';
+import { MatSliderChange, MatSelectChange, MatDialogRef } from '@angular/material';
 import { FeedbackService } from '../../services/feedback.service';
 
 import { from } from 'rxjs';
@@ -33,7 +33,12 @@ export class FeedbackFormComponent implements OnInit {
   sliderUsed = false;
   feedbacks = [];
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService,
+              public dialogRef: MatDialogRef<any>) { }
+
+  closeDialog() {
+    this.dialogRef.close('Feedback dialog closed!');
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -41,9 +46,23 @@ export class FeedbackFormComponent implements OnInit {
     if (!this.sliderUsed) {
       this.model.rating = null;
     }
+    if (this.model.background) {
+      const key = this.model.background;
+      this.model.background = this.backgrounds[key]['viewValue'];
+    }
+
+    this.sendFeedback(newFeedback);
+    // update UI
+    // htis;router.navigate('home');
+  }
+
+  sendFeedback(newFeedback) {
     this.feedbackService
       .sendFeedback(newFeedback)
-      .subscribe(feedback => this.feedbacks.push(feedback));
+      .subscribe(
+        (data: Feedback) => {
+          console.log(data);
+        });
   }
 
   onInputChange(event: MatSliderChange) {

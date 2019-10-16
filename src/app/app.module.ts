@@ -32,9 +32,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { from } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
-import { MessageService } from './services/message.service';
 import { FeedbackService } from './services/feedback.service';
-import { HttpErrorHandler } from './services/http-error-handler.service';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -54,7 +52,8 @@ firebase.initializeApp(environment.firebaseConfig);
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
-    DecisionsDialogComponent
+    DecisionsDialogComponent,
+    FeedbackFormComponent
   ],
   imports: [
     BrowserModule,
@@ -76,9 +75,7 @@ firebase.initializeApp(environment.firebaseConfig);
     LocationService,
     DecisionLocationsService,
     DecisionsService,
-    MessageService,
     FeedbackService,
-    HttpErrorHandler,
     {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'}
   ],
   bootstrap: [AppComponent]

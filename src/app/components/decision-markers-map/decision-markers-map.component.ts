@@ -110,6 +110,18 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     });
   }
 
+  public openFeedback() {
+    const dialogRef = this.dialog.open(FeedbackFormComponent,  {
+      height: '700px',
+      width: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`); 
+    });
+
+  }
+
   public distance(start: GeoFirePoint, destination: GeoFirePoint): string {
     return Geokit.distance(this._geopoint2Literal(start), this._geopoint2Literal(destination), 'miles').toFixed(1);
   }

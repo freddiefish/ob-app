@@ -1,4 +1,8 @@
-<!-- <agm-map [latitude]="(coordsMap | async)?.latitude"
+<mat-toolbar color="accent">
+  <span class="center" (click)="openFeedback()"><mat-icon>help</mat-icon> Feedback</span>
+</mat-toolbar>
+
+<agm-map [latitude]="(coordsMap | async)?.latitude"
          [longitude]="(coordsMap | async)?.longitude"
          (centerChange)="centerChange($event)"
          (idle)="idle()"
@@ -52,9 +56,8 @@
   <i class="mdc-fab__icon material-icons">
     list
   </i>
-</button> -->
+</button> 
 
-<app-feedback-form></app-feedback-form>
 
 <!-- <div class="search-box">
     <app-search></app-search>

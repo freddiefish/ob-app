@@ -8,4 +8,5 @@ export const environment = {
     storageBucket: 'geofirestore.appspot.com',
     messagingSenderId: '830598661992'
   },
+  api: 'https://ob-app-db2b6.appspot.com/api/email'
 };

@@ -13,4 +13,6 @@ export const environment = {
     messagingSenderId: '1024346721563',
     appId: '1:1024346721563:web:da1b5efcc22d17ef18d7be'
   },
+  api: 'http://localhost:8080/api/email.php'
+  // api: 'https://ob-app-dev-252415.appspot.com/api/email'
 };
