@@ -1,5 +1,5 @@
 <mat-toolbar color="accent">
-  <span class="center" (click)="openFeedback()"><mat-icon>help</mat-icon> Feedback</span>
+  <button mat-flat-button (click)="openFeedback()" class="center"><mat-icon>help</mat-icon> Feedback</button>
 </mat-toolbar>
 
 <agm-map [latitude]="(coordsMap | async)?.latitude"

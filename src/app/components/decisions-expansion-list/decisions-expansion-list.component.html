@@ -1,8 +1,10 @@
+<div class="container"> 
+
 <ng-container *ngIf="infinite | async as decisions">
 
     <mat-accordion class="decisions-accordeon">
   
-  <cdk-virtual-scroll-viewport itemSize="100" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length - 1].date))" class="viewport">
+  <cdk-virtual-scroll-viewport itemSize="150" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length - 1].date))" class="viewport">
     
 
       <mat-expansion-panel *cdkVirtualFor="let d of decisions, let i = index; trackBy: trackByIdx" class="animated lightSpeedIn decision-expansion mat-elevation-z10">
@@ -13,7 +15,7 @@
                   {{d.title}}
                 </mat-panel-title>
                 
-                <mat-panel-description>
+                <mat-panel-description class="decision-description">
                     {{ d.status | uppercase }} <br>
                     {{ d.date | date: 'dd/MM/yyyy'  }} <br>
                     {{d.groupName}} 
@@ -56,21 +58,19 @@
 
               <mat-action-row class="decision-actions">
                       
-                      <div *ngIf="!d.published">
+                  <div *ngIf="!d.published">
 
-                        <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{d.groupName}}: {{d.title}}%0D%0A%0D%0ADank u,%0D%0A%0D%0AFrederik Feys%0D%0A0488 020 010%0D%0AKapucinessenstraat 12%0D%0A2000 Antwerpen" button mat-button class="mat-raised-button mat-primary" (click)="askFullText()">
-                            Vraag volledige tekst
-                        </a>
+                    <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{d.groupName}}: {{d.offTitle}}%0D%0A%0D%0ADank u,%0D%0A%0D%0AFrederik Feys%0D%0A0488 020 010%0D%0AKapucinessenstraat 12%0D%0A2000 Antwerpen" button mat-button class="mat-raised-button mat-primary" (click)="askFullText()">
+                        Vraag volledige tekst</a>
 
-                      </div>
-                  
-                      <div *ngIf="d.published">
+                  </div>
+              
+                  <div *ngIf="d.published">
 
-                          <a href="https://storage.cloud.google.com/ob-app-dev-252415.appspot.com/pubs/_besluit_{{d.docId}}.pdf" button mat-button class="mat-raised-button">
-                            Volledige tekst
-                        </a>
+                      <a href="https://storage.googleapis.com/ob-app-db2b6.appspot.com/pubs/_besluit_{{d.docId}}.pdf" target="_blank" button mat-button class="mat-raised-button">
+                        Volledige tekst</a>
 
-                      </div>
+                  </div>
 
               </mat-action-row>
             
@@ -88,3 +88,5 @@
   
 
 </ng-container>
+
+</div>

@@ -1,5 +1,6 @@
-.mat-dialog-container{
-  
+.container {
+  height: 100vh;
+  max-width: 650px;
 }
 
 app-street-view {
@@ -12,10 +13,4 @@ app-street-view {
 
 .close-button {
   float: right;
-}
-
-.more-info-url {
-  i {
-    vertical-align: middle;
-  }
 }

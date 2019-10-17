@@ -100,8 +100,10 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   public openNonGeoDecisionList($event: IDecision) {
 
-    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent , { height: '100vh',
-    minWidth: '100vw', panelClass: 'app-full-bleed-dialog' });
+    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent , {
+      maxHeight: '100vh',
+      maxWidth: '100vw'
+    });
 
     dialogNonGeoRef.afterOpened()
     .subscribe(result => {
@@ -112,8 +114,8 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   public openFeedback() {
     const dialogRef = this.dialog.open(FeedbackFormComponent,  {
-      height: '700px',
-      width: '600px'
+      maxHeight: '100vh',
+      maxWidth: '100vw'
     });
 
     dialogRef.afterClosed().subscribe(result => {

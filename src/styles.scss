@@ -2,9 +2,11 @@
 // @import "modal"; OBSOLTE
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-.app-full-bleed-dialog .mat-dialog-container{
-  background-color: #40ff89;
+.mat-dialog-container{
+  background-color: #f9fffb;
   padding: 0px;
+  opacity: 0.90;
+  filter: alpha(opacity=90); /* For IE8 and earlier */
 }
 
 agm-map {
@@ -43,6 +45,16 @@ agm-map {
   left: 16px;
   top: 16px;
 }
+
+@media(max-width: 500px) {
+  .mat-expansion-panel-body {
+    padding: 0 10px 16px !important;
+  }
+  .mat-dialog-container {
+    padding: 24px 10px 24px !important;
+  }
+}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
