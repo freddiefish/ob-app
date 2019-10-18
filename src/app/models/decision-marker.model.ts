@@ -8,6 +8,7 @@ export interface IDecision {
   assocDocs?: any;
   date: string;
   decision?: any;
+  argumentation?: string;
   docId: string;
   financialConseq?: boolean;
   financialStakeholders?: any;
@@ -19,7 +20,6 @@ export interface IDecision {
   published: boolean;
   sortIndex1: string;
   status: string;
-  textParts?: any;
   title: string;
 }
 
@@ -40,6 +40,7 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     assocDocs: data.assocDocs,
     date: data.date,
     decision: data.decision,
+    argumentation: data.argumentation,
     docId: data.docId,
     financialConseq: data.financialConseq,
     financialStakeholders: data.financialStakeholders,
@@ -51,7 +52,6 @@ export const createDecision = (data: Partial<IDecision>): IDecision => {
     published: data.published,
     sortIndex1: data.sortIndex1,
     status: data.status,
-    textParts: data.textParts,
     title: data.title
   };
 };

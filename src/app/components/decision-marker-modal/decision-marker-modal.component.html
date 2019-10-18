@@ -36,6 +36,11 @@
            target="_blank"
            href="https://storage.googleapis.com/ob-app-db2b6.appspot.com/pubs/_besluit_{{decision.docId}}.pdf" button mat-button>
           Volledige tekst </a>
+
+          <a class="mat-raised-button mat-primary"
+          *ngIf="!decision.published"
+          href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{decision.groupName}}: {{decision.offTitle}}%0D%0A%0D%0ADank u,%0D%0A%0D%0AFrederik Feys%0D%0A0488 020 010%0D%0AKapucinessenstraat 12%0D%0A2000 Antwerpen" button mat-button (click)="askFullText()">
+            Vraag volledige tekst</a> 
       </p>
 
       <div *ngIf="decision.financialStakeholders">
@@ -47,7 +52,9 @@
         </ul>
       </div>
 
-      <div *ngIf="decision.decision" >
+      <div *ngIf="decision.argumentation" [innerHTML]="decision.argumentation"></div>
+
+      <!-- <div *ngIf="decision.decision" >
 
           <h3>Besluit</h3>
           <div *ngIf="decision.decision?.text">
@@ -61,7 +68,7 @@
             </div>
           </div>
           
-      </div>
+      </div> -->
       
 
       <div *ngIf="decision.addenda">
@@ -85,6 +92,7 @@
     
     </ng-container>
 
+    
   </div> 
 
 </ng-container>

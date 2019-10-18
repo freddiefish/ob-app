@@ -101,5 +101,7 @@ export class DecisionMarkerModalComponent implements OnInit {
         }),
       );
   }
-
+  askFullText() {
+    
+  }
 }
