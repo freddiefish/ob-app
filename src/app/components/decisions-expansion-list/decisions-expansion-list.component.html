@@ -46,7 +46,8 @@
               <div *ngIf="d.addenda">
                   <h3>Bijlagen</h3>
                 <p *ngFor="let addendum of d.addenda">
-                    {{addendum}}
+                    {{addendum}} <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze bijlagen lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A
+                    {{addendum}} %0D%0A%0D%0A Besluit: {{d.offTitle}}%0D%0A%0D%0ADank u,">Vraag bijlage</a> 
                 </p>
               </div>
         
@@ -62,16 +63,12 @@
                       
                   <div *ngIf="!d.published">
 
-                    <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{d.groupName}}: {{d.offTitle}}%0D%0A%0D%0ADank u,%0D%0A%0D%0AFrederik Feys%0D%0A0488 020 010%0D%0AKapucinessenstraat 12%0D%0A2000 Antwerpen" button mat-button class="mat-raised-button mat-primary" (click)="askFullText()">
-                        Vraag volledige tekst</a>
+                    <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0ABesluit: {{d.offTitle}}%0D%0A%0D%0ADank u,">Vraag volledige tekst</a>
 
                   </div>
               
                   <div *ngIf="d.published">
-
-                      <a href="https://storage.googleapis.com/ob-app-db2b6.appspot.com/pubs/_besluit_{{d.docId}}.pdf" target="_blank" button mat-button class="mat-raised-button">
-                        Volledige tekst</a>
-
+                      <a href="https://ebesluit.antwerpen.be/publication/{{d.docId}}/download" target="_blank" button mat-button class="mat-raised-button">Volledige tekst</a>
                   </div>
 
               </mat-action-row>
