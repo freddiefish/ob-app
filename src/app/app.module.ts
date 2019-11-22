@@ -33,6 +33,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 import { from } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FeedbackService } from './services/feedback.service';
+import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -48,12 +49,14 @@ firebase.initializeApp(environment.firebaseConfig);
     DecisionsExpansionListComponent,
     SearchComponent,
     FeedbackFormComponent,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    NotifyDialogComponent
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
     DecisionsDialogComponent,
-    FeedbackFormComponent
+    FeedbackFormComponent,
+    NotifyDialogComponent
   ],
   imports: [
     BrowserModule,

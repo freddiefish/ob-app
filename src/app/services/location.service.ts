@@ -42,7 +42,7 @@ export class LocationService {
         this._coordinates.next(InitializedGeoFireClient.geoFireClient.point(success.coords.latitude, success.coords.longitude));
         this.watchStart();
       }, (error: any) => {
-        console.log(error);
+        console.log('ERROR(' + error.code + '): ' + error.message);
       });
     }
   }
@@ -66,7 +66,7 @@ export class LocationService {
         this._coordinates.next(InitializedGeoFireClient.geoFireClient.point(success.coords.latitude, success.coords.longitude));
         if (this._updating.value) { this._mapCenter.next(this._coordinates.value); }
       }, (error: any) => {
-        console.warn(error);
+        console.warn('ERROR(' + error.code + '): ' + error.message);
       }, { enableHighAccuracy: true, timeout: 500000, maximumAge: 1 });
       this._watching.next(true);
       this._updating.next(true);

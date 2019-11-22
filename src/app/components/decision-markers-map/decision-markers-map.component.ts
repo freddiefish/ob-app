@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, Inject} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, AfterViewInit, Output, Inject} from '@angular/core';
 import {Geokit, LatLngLiteral} from 'geokit';
-import {Observable} from 'rxjs';
+import {Observable, from} from 'rxjs';
 import {first} from 'rxjs/operators';
 
 import {LocationService} from '../../services/location.service';
@@ -16,14 +16,14 @@ import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.com
 import {MatDialog } from '@angular/material';
 import {SearchComponent} from '../search/search.component';
 import {FeedbackFormComponent} from '../feedback-form/feedback-form.component';
-
+import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
 
 @Component({
   selector: 'app-decision-markers-map',
   templateUrl: './decision-markers-map.component.html',
   styleUrls: ['./decision-markers-map.component.scss']
 })
-export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
+export class DecisionMarkersMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO: Revert this
   private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
@@ -43,8 +43,33 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     private markersService: DecisionLocationsService,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.notifyLocationUse();
   }
+
+  notifyLocationUse() {
+    if (!localStorage.getItem('notifiedLocationUse')) {
+      this.showDialogLocationUse();
+    }
+  }
+
+  showDialogLocationUse() {
+    const dialogNotifyLocUse = this.dialog.open(NotifyDialogComponent , {
+      height: '180px',
+      width: '300px',
+    });
+
+    dialogNotifyLocUse.afterClosed()
+    .subscribe(result => {
+      console.log('Dialog result: ', result);
+      if (result) {
+        localStorage.setItem('notifiedLocationUse', 'true');
+      }
+    });
+  }
+
 
   ngOnDestroy() {
     this.locationService.updatingStart();
