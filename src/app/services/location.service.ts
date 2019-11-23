@@ -3,6 +3,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {LatLngLiteral} from '@agm/core';
 import {GeoFirePoint} from 'geofirex';
 import {InitializedGeoFireClient} from './initialized-geo-fire-client.service';
+import { MatDialog } from '@angular/material';
+import { NotifyDialogComponent } from '../components/notify-dialog/notify-dialog.component';
+
 
 @Injectable()
 export class LocationService {
@@ -16,7 +19,9 @@ export class LocationService {
   private _watching: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _updating: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
     this._getLocation();
   }
 
@@ -37,6 +42,34 @@ export class LocationService {
   }
 
   private _getLocation(): void {
+    this.notifyLocationUse();
+  }
+
+  notifyLocationUse() {
+    if (!localStorage.getItem('notifiedLocationUse')) {
+      this.showDialogLocationUse();
+    } else {
+      this.getCurrentPosition();
+    }
+  }
+
+  showDialogLocationUse() {
+    const dialogNotifyLocUse = this.dialog.open(NotifyDialogComponent , {
+      height: '220px',
+      width: '300px',
+    });
+
+    dialogNotifyLocUse.afterClosed()
+    .subscribe(result => {
+      console.log('Dialog result: ', result);
+      if (result) {
+        localStorage.setItem('notifiedLocationUse', 'true');
+        this.getCurrentPosition();
+      }
+    });
+  }
+
+  private getCurrentPosition() {
     if ((typeof window !== 'undefined') && 'geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((success: any) => {
         this._coordinates.next(InitializedGeoFireClient.geoFireClient.point(success.coords.latitude, success.coords.longitude));
