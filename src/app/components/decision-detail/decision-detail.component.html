@@ -1,0 +1,101 @@
+<div class="container">
+
+    <mat-toolbar color="accent" class="toolbar">
+
+        <span><button mat-button (click)="goBack()" aria-label="back-button" class="back-button">
+            <i class="material-icons">arrow_back_ios</i>
+        </button> </span>
+        
+        <span class="center">{{decision?.groupName}}</span>
+        <!-- <ng-container *ngIf="decisionsInThisLocation$ | async; let decisionsInThisLocation">
+                <button mat-icon-button
+                        *ngIf="decisionsInThisLocation?.length > 1"
+                        [matMenuTriggerFor]="otherDecisions"
+                        [matMenuTriggerData]="{decisions: decisionsInThisLocation}">
+                  <mat-icon>keyboard_arrow_down</mat-icon>
+                </button>
+        </ng-container> -->
+    </mat-toolbar>  
+
+    <!-- <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view> -->
+
+    <!-- {{decision | json}} -->
+    <ng-container *ngIf="decision" >
+
+        <div class="content">
+            <p style="text-align: right;">
+                {{ decision.status | uppercase }} op {{decision.date | date: 'dd/MM/yyyy'}} <br>
+                {{ decision.groupName }}<br>
+            
+            <a class="mat-raised-button"
+                *ngIf="decision.published"
+                target="_blank"
+                href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button>
+                Volledige tekst </a>
+
+                <a
+                *ngIf="!decision.published"
+                href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{decision.groupName}}: {{decision.offTitle}}%0D%0A%0D%0ADank u,">
+                Vraag volledige tekst</a> 
+            </p>
+        
+            <div *ngIf="decision.financialStakeholders">
+                <h3>Belanghebbenden</h3>
+            <ul>
+                <li *ngFor="let stakeHolder of decision.financialStakeholders">
+                    {{stakeHolder.Name}}, {{stakeHolder.JuridicalForm}} <a href="https://openthebox.be/company/{{stakeHolder.VAT}}" target="_blank"> <mat-icon> scatter_plot</mat-icon> </a> {{stakeHolder.Amount}} €
+                </li>
+            </ul>
+            </div>
+        
+            <div *ngIf="decision.argumentation" [innerHTML]="decision.argumentation"></div>
+
+            <div *ngIf="decision.addenda">
+                <h3>Bijlagen</h3>
+                <ul>
+                <li *ngFor="let addendum of decision.addenda">
+                    {{addendum}} <a href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze bijlagen lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A
+                    {{addendum}} %0D%0A%0D%0A Besluit: {{decision.offTitle}}%0D%0A%0D%0ADank u,">Vraag bijlage</a> 
+                </li>
+                </ul>
+            </div>
+        
+            <div *ngIf="decision.assocDocs">
+                <h3>Gerelateerde besluiten</h3>
+                <ul>
+                <li *ngFor="let assocDoc of decision.assocDocs">
+                    {{assocDoc}}
+                </li>
+                </ul>
+            </div>
+
+    </div>
+
+    </ng-container>
+
+</div>
+
+
+<!-- <mat-menu #otherDecisions="matMenu">
+
+        <ng-template matMenuContent let-decisions="decisions">
+      
+          <p style=" padding-left: 0.5em; padding-right: 0.5em;">{{decisions?.length && decisions.length - 1}} meer besluiten{{decisions?.length > 2 ? 's' : ''}} op deze locatie:</p>
+      
+          <ng-container *ngFor="let item of decisions">
+      
+            <ng-container *ngIf="item.id !== decision.id">
+      
+              <button mat-menu-item
+                      (click)="setDecision(item)">
+      
+                {{item.date | date}} {{item.title}}
+      
+              </button>
+      
+            </ng-container>
+      
+          </ng-container>
+      
+        </ng-template>
+</mat-menu> -->

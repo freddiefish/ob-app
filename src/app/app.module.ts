@@ -21,19 +21,22 @@ import { DecisionMarkerModalComponent } from './components/decision-marker-modal
 // import { ModalComponent } from './components/modal.component';
 import { ReadMoreComponent } from './components/read-more.component';
 import { EllipsisModule } from 'ngx-ellipsis';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { EmailValidatorDirective } from './shared/emailvalidator.directive';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { DecisionsDialogComponent } from './components/decisions-dialog/decisions-dialog.component';
-import { DecisionsExpansionListComponent } from './components/decisions-expansion-list/decisions-expansion-list.component';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatCardModule } from '@angular/material/card';
+import { DecisionsListComponent } from './components/decisions-list/decisions-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { from } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FeedbackService } from './services/feedback.service';
 import { NotifyDialogComponent } from './components/notify-dialog/notify-dialog.component';
+import { DecisionDetailComponent } from './components/decision-detail/decision-detail.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -45,16 +48,15 @@ firebase.initializeApp(environment.firebaseConfig);
     DecisionMarkersMapComponent,
     DecisionMarkerModalComponent,
     ReadMoreComponent,
-    DecisionsDialogComponent,
-    DecisionsExpansionListComponent,
+    DecisionsListComponent,
     SearchComponent,
     FeedbackFormComponent,
     EmailValidatorDirective,
-    NotifyDialogComponent
+    NotifyDialogComponent,
+    DecisionDetailComponent
   ],
   entryComponents: [
     DecisionMarkerModalComponent,
-    DecisionsDialogComponent,
     FeedbackFormComponent,
     NotifyDialogComponent
   ],
@@ -72,7 +74,10 @@ firebase.initializeApp(environment.firebaseConfig);
     EllipsisModule,
     BrowserAnimationsModule,
     SharedModule,
-    ScrollingModule
+    ScrollingModule,
+    MatDialogModule,
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [
     LocationService,

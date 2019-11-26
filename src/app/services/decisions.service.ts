@@ -33,6 +33,24 @@ export class DecisionsService {
         );
   }
 
+  public getDecision(docId: string): Observable<IDecision[]> {
+    const query = this.db.collection<IDecision>(
+      'decisions',
+      ref => ref.where('docId', '==', docId)
+                );
+
+    return query
+    .snapshotChanges()
+    .pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+      );
+
+  }
+
 }
 
 

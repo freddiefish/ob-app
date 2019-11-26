@@ -1,38 +1,40 @@
 .container {
-  display: flex;
-  justify-content: center;
+
 }
-.decisions-accordeon {
+
+.toolbar{
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.back-button {
   
 }
 
+.arrow-card {
+  float: right;
+  padding: 35px 0;
+  color: rgb(94, 88, 80)
+}
 
-.decision-expansion {
+.card-link {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%; width: 100%;
+}
+
+.decision-card {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
+.decision-header {}
 
-.decision-header{
-  padding: 30px;
-}
+.decision-title {}
 
-.decision-title {
-  width: 100%;
-  font-weight: 800;
-  margin-right: 10px;
-}
+.decision-description {}
 
-.decision-description {
-
-}
-
-.decision-actions {
-    text-align: right;
-}
-
-.viewport {
-}
+.viewport {}
 
 cdk-virtual-scroll-viewport,
 ul {
@@ -61,17 +63,20 @@ ul {
   }
 } 
 
-
 @media(max-width: 500px) { 
   cdk-virtual-scroll-viewport,
     ul {
       min-height: 100vh;
       width: 100vw;
     } 
-    .decision-header{
-      padding-top: 20px;
-      padding-bottom: 20px;
-      padding-left: 10px;
-      padding-right: 15px;
+    .decision-header {}
+
+    .mat-toolbar-single-row {
+      padding: 0px;
     }
+
+    .back-button {
+        margin-left: 0px
+    }
+
 } 

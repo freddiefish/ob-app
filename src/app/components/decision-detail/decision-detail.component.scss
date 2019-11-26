@@ -1,0 +1,22 @@
+.content {
+    margin: auto;
+    max-width: 800px;
+}
+
+.back-button {
+
+}
+
+@media(max-width: 500px) {
+    .content {
+        margin: 8px !important
+    }
+
+    .mat-toolbar-single-row {
+        padding: 0px;
+    }
+
+    .back-button {
+        margin-left: 0px
+    }
+}

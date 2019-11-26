@@ -1,19 +1,17 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { IDecision } from '../../models/decision-marker.model';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { throttleTime, mergeMap , scan, map, tap, flatMap} from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-decisions-expansion-list',
-  templateUrl: './decisions-expansion-list.component.html',
-  styleUrls: ['./decisions-expansion-list.component.scss']
+  selector: 'app-decisions-list',
+  templateUrl: './decisions-list.component.html',
+  styleUrls: ['./decisions-list.component.scss']
 })
-export class DecisionsExpansionListComponent implements OnInit {
+export class DecisionsListComponent implements OnInit {
 
   @ViewChild(CdkVirtualScrollViewport, {static: false})
   viewport: CdkVirtualScrollViewport;
@@ -26,7 +24,9 @@ export class DecisionsExpansionListComponent implements OnInit {
 
   msg: string;
 
-  constructor(private db: AngularFirestore) {
+  constructor(
+    private db: AngularFirestore,
+    private location: Location) {
    const batchMap = this.offset.pipe(
       throttleTime(500),
       mergeMap(n => this.getBatch(n)),
@@ -49,7 +49,7 @@ export class DecisionsExpansionListComponent implements OnInit {
   getBatch(offset) {
 
     console.log(offset);
-  
+
     return this.db
       .collection('decisions', ref =>
          ref
@@ -98,5 +98,8 @@ export class DecisionsExpansionListComponent implements OnInit {
   ngOnInit() {
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 
 }

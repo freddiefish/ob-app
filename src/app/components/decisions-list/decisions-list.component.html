@@ -1,0 +1,54 @@
+<div class="container"> 
+
+  <mat-toolbar color="accent" class="toolbar">
+
+    <span><button mat-button (click)="goBack()" aria-label="back-button" class="back-button">
+        <i class="material-icons">arrow_back_ios</i>
+    </button> </span>
+  
+    <span class="center">Algemene besluiten</span>
+
+</mat-toolbar>  
+
+  <ng-container *ngIf="infinite | async as decisions">
+
+    <cdk-virtual-scroll-viewport itemSize="188" (scrolledIndexChange)="nextBatch($event, (decisions[decisions.length - 1].date))" class="viewport">
+
+        <mat-card *cdkVirtualFor="let d of decisions, let i = index; trackBy: trackByIdx" class="animated lightSpeedIn decision-card mat-elevation-z10">
+           
+          <a routerLink="/detail/{{d.docId}}" class="card-link"></a>
+          <i class="material-icons arrow-card">arrow_forward_ios</i>
+
+          <mat-card-header class="decision-header">
+
+            <mat-card-title class="decision-title">
+              {{d.title}}
+            </mat-card-title>
+            
+            <mat-card-subtitle class="decision-description">
+                {{ d.status | uppercase }} <br>
+                {{ d.date | date: 'dd/MM/yyyy'  }} <br>
+                {{d.groupName}} 
+            </mat-card-subtitle>
+
+          </mat-card-header>
+          
+          <div *ngIf="d.financialStakeholders">
+            <mat-card-content>
+              <h3>Belanghebbenden</h3>
+              <p *ngFor="let stakeHolder of d.financialStakeholders">
+                    {{stakeHolder.Name}}, {{stakeHolder.Amount}} €
+              </p>
+            </mat-card-content>
+          </div>
+        
+        </mat-card>
+        
+        <iframe style="margin: 0 auto; display: flex" *ngIf="theEnd" src="https://giphy.com/embed/lD76yTC5zxZPG" width="480"
+          height="352" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+    </cdk-virtual-scroll-viewport>
+
+  </ng-container>
+
+</div>

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, Inject} from '@angular/core';
+import { Router } from '@angular/router';
 import {Geokit, LatLngLiteral} from 'geokit';
 import {Observable, from} from 'rxjs';
 import {first} from 'rxjs/operators';
@@ -12,10 +13,9 @@ import {GeoFirePoint} from 'geofirex';
 import {IDecision} from '../../models/decision-marker.model';
 import {InitializedGeoFireClient} from '../../services/initialized-geo-fire-client.service';
 import {DecisionMarkerModalComponent} from '../decision-marker-modal/decision-marker-modal.component';
-import {DecisionsDialogComponent} from '../decisions-dialog/decisions-dialog.component';
-import {MatDialog } from '@angular/material';
 import {SearchComponent} from '../search/search.component';
 import {FeedbackFormComponent} from '../feedback-form/feedback-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-decision-markers-map',
@@ -26,10 +26,6 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
 
   // TODO: Revert this
   private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(0, 0);
-  /*private _lastLocation: GeoFirePoint = InitializedGeoFireClient.geoFireClient.point(
-    environment.mockedAntwerpLocation.latitude,
-    environment.mockedAntwerpLocation.longitude,
-  );*/
   private _lastOpen: string;
 
   @Output() decisionMarkerSelected = new EventEmitter<IDecisionMarkerSelected>();
@@ -40,7 +36,8 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   constructor(
     private locationService: LocationService,
     private markersService: DecisionLocationsService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    public router: Router) { }
 
   ngOnInit() {}
 
@@ -97,17 +94,7 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
   }
 
   public openNonGeoDecisionList($event: IDecision) {
-
-    const dialogNonGeoRef = this.dialog.open(DecisionsDialogComponent , {
-      maxHeight: '100vh',
-      maxWidth: '100vw'
-    });
-
-    dialogNonGeoRef.afterOpened()
-    .subscribe(result => {
-      // dialogNonGeoRef.componentInstance.allNonGeoDecisions = $event.allNonGeoDecisions;
-      console.log('Dialog result: ', result);
-    });
+    this.router.navigate(['list']);
   }
 
   public openFeedback() {
@@ -117,7 +104,7 @@ export class DecisionMarkersMapComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); 
+      console.log(`Dialog result: ${result}`);
     });
 
   }
