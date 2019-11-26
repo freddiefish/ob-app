@@ -1,20 +1,20 @@
 <div class="container">
 
     <mat-toolbar color="accent" class="toolbar">
-
-        <span><button mat-button (click)="goBack()" aria-label="back-button" class="back-button">
-            <i class="material-icons">arrow_back_ios</i>
-        </button> </span>
-        
-        <span class="center">{{decision?.groupName}}</span>
-        <!-- <ng-container *ngIf="decisionsInThisLocation$ | async; let decisionsInThisLocation">
-                <button mat-icon-button
-                        *ngIf="decisionsInThisLocation?.length > 1"
-                        [matMenuTriggerFor]="otherDecisions"
-                        [matMenuTriggerData]="{decisions: decisionsInThisLocation}">
-                  <mat-icon>keyboard_arrow_down</mat-icon>
-                </button>
-        </ng-container> -->
+                <span>
+                    <button mat-button (click)="goBack()" aria-label="back-button" class="back-button">
+                        <i class="material-icons">arrow_back_ios</i>
+                    </button> </span>
+                    
+                <span class="center">{{decision?.groupName}}</span>
+                    <!-- <ng-container *ngIf="decisionsInThisLocation$ | async; let decisionsInThisLocation">
+                            <button mat-icon-button
+                                    *ngIf="decisionsInThisLocation?.length > 1"
+                                    [matMenuTriggerFor]="otherDecisions"
+                                    [matMenuTriggerData]="{decisions: decisionsInThisLocation}">
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                            </button>
+                    </ng-container> -->
     </mat-toolbar>  
 
     <!-- <app-street-view [position]="{lat: decisionLocation.point.geopoint._lat, lng: decisionLocation.point.geopoint._long}"></app-street-view> -->
@@ -23,21 +23,24 @@
     <ng-container *ngIf="decision" >
 
         <div class="content">
-            <p style="text-align: right;">
-                {{ decision.status | uppercase }} op {{decision.date | date: 'dd/MM/yyyy'}} <br>
-                {{ decision.groupName }}<br>
+            <h1 class="title">{{decision?.title}}</h1>
+            <div class="box-right">
+                    <p style="text-align: right;">
+                            {{ decision.status | uppercase }} op {{decision.date | date: 'dd/MM/yyyy'}} 
+                    </p>    
+                        <a class="mat-raised-button"
+                            *ngIf="decision.published"
+                            target="_blank"
+                            href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button>
+                            Volledige tekst </a>
             
-            <a class="mat-raised-button"
-                *ngIf="decision.published"
-                target="_blank"
-                href="https://ebesluit.antwerpen.be/publication/{{decision.docId}}/download" button mat-button>
-                Volledige tekst </a>
-
-                <a
-                *ngIf="!decision.published"
-                href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{decision.groupName}}: {{decision.offTitle}}%0D%0A%0D%0ADank u,">
-                Vraag volledige tekst</a> 
-            </p>
+                            <a
+                            *ngIf="!decision.published"
+                            href="mailto:besluitvorming.an@antwerpen.be?subject=Lezen besluiten&body=Goede Dag,%0D%0A%0D%0AIk wil deze besluiten lezen, maar de link werkt helaas niet. Hoe kan ik het lezen?%0D%0A%0D%0A{{decision.groupName}}: {{decision.offTitle}}%0D%0A%0D%0ADank u,">
+                            Vraag volledige tekst</a> 
+                       
+            </div>
+            
         
             <div *ngIf="decision.financialStakeholders">
                 <h3>Belanghebbenden</h3>

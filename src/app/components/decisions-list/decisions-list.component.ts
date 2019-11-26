@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { IDecision } from '../../models/decision-marker.model';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -14,6 +15,7 @@ import { throttleTime, mergeMap , scan, map, tap, flatMap} from 'rxjs/operators'
 export class DecisionsListComponent implements OnInit {
 
   @ViewChild(CdkVirtualScrollViewport, {static: false})
+
   viewport: CdkVirtualScrollViewport;
 
   batch = 20;
@@ -26,7 +28,8 @@ export class DecisionsListComponent implements OnInit {
 
   constructor(
     private db: AngularFirestore,
-    private location: Location) {
+    private location: Location,
+    private router: Router) {
    const batchMap = this.offset.pipe(
       throttleTime(500),
       mergeMap(n => this.getBatch(n)),
@@ -100,6 +103,10 @@ export class DecisionsListComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+    this.router.navigate(['/'])
+    .then(() => {
+      window.location.reload();
+    });
   }
 
 }
