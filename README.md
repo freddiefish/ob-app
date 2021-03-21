@@ -12,6 +12,7 @@ It is an open source project that aims to open up local council decisions for ci
 
 ## Configure 
 
+Setup FireBase API key in environment files under src/environments/
 Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Supported Sources
