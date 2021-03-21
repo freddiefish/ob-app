@@ -1,29 +1,39 @@
-# SpittinHotGeoFirestore
+# Open Bestuur 
 
-[Slides](https://docs.google.com/presentation/d/1zAc2Om0yHij0SRr8c_4SlTB8zI7A-a26BzjRNAvK5Ec/edit?usp=sharing)
+It is an open source project that aims to open up local council decisions for citizens in Antwerp, Belgium. Front End is Angular based.
 
-[Application](http://spittinhot.geofirestore.com)
+## Important links
 
-## Development server
+[Old promo video](https://www.youtube.com/watch?v=HktyXjdLedI)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Related repositories
 
-## Code scaffolding
+[Back-API](https://github.com/freddiefish/ob-app-back)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Configure 
 
-## Build
+Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Supported Sources
 
-## Running unit tests
+Data extraction support is available for the following source systems:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    + [e-besluit](https://ebesluit.antwerpen.be/)
 
-## Running end-to-end tests
+## Contributing
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Please read through our [contributing guidelines](https://github.com/freddiefish/ob-app-back/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
-## Further help
+## Authors and contributors
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ + Initiator Frederik Feys ([@FFeys](https://twitter.com/ffeys))
+
+## Copyright and license
+
+The Open Bestuur project is distributed under the [GNU GENERAL PUBLIC LICENSE Version 3](https://opensource.org/licenses/GPL-3.0)
+
+## Future
+
+Future developments can include intelligent text (Machine learning) processing to create relevent citizen intelligence out of the often lengthy council decisions. 
+
+Project demo currently running at [here](https://ob-app-db2b6.firebaseapp.com)
